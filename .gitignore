@@ -1,0 +1,11 @@
+# Archivos temporales de verificación
+_check.html
+_figs.html
+
+# Configuración local de herramientas
+.claude/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini

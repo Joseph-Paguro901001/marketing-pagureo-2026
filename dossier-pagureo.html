@@ -1,0 +1,2238 @@
+<title>Dossier PAGUREO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#EDF0F5;
+  --surface:#FFFFFF;
+  --surface-2:#F6F8FB;
+  --ink:#131A2A;
+  --ink-2:#4C5872;
+  --ink-3:#77839C;
+  --line:#D6DCE7;
+  --line-soft:#E5EAF1;
+  --azul:#2B4C7E;
+  --azul-soft:#E4EBF5;
+  --naranja:#C2501B;
+  --naranja-soft:#FBEAE0;
+
+  --ok:#1B6E52;      --ok-bg:#E1F0EA;
+  --warn:#9A6A12;    --warn-bg:#F8EFDC;
+  --draft:#55637F;   --draft-bg:#E7EBF2;
+  --out:#828B9C;     --out-bg:#EAECF0;
+
+  --shadow:0 1px 2px rgba(19,26,42,.05), 0 8px 24px -16px rgba(19,26,42,.28);
+  --radius:6px;
+  --rail-w:264px;
+
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1120;
+    --surface:#141C2C;
+    --surface-2:#1A2333;
+    --ink:#E3E8F1;
+    --ink-2:#9BA6BC;
+    --ink-3:#7D889F;
+    --line:#28324A;
+    --line-soft:#202940;
+    --azul:#88ABE0;
+    --azul-soft:#1B2740;
+    --naranja:#EE8049;
+    --naranja-soft:#33200F;
+
+    --ok:#5FC49C;      --ok-bg:#12291F;
+    --warn:#D9A34B;    --warn-bg:#2C2210;
+    --draft:#9AA7C0;   --draft-bg:#1D2537;
+    --out:#7E8798;     --out-bg:#1A202D;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1120;
+  --surface:#141C2C;
+  --surface-2:#1A2333;
+  --ink:#E3E8F1;
+  --ink-2:#9BA6BC;
+  --ink-3:#7D889F;
+  --line:#28324A;
+  --line-soft:#202940;
+  --azul:#88ABE0;
+  --azul-soft:#1B2740;
+  --naranja:#EE8049;
+  --naranja-soft:#33200F;
+
+  --ok:#5FC49C;      --ok-bg:#12291F;
+  --warn:#D9A34B;    --warn-bg:#2C2210;
+  --draft:#9AA7C0;   --draft-bg:#1D2537;
+  --out:#7E8798;     --out-bg:#1A202D;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:15px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--naranja);color:#fff}
+a{color:var(--azul);text-underline-offset:3px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:3px;border-radius:3px}
+
+/* ============ SHELL ============ */
+.shell{display:grid;grid-template-columns:var(--rail-w) minmax(0,1fr);gap:0;max-width:1420px;margin:0 auto}
+
+/* ============ RAIL ============ */
+.rail{
+  border-right:1px solid var(--line);
+  background:var(--surface);
+  position:sticky;top:0;align-self:start;
+  height:100vh;overflow-y:auto;
+  padding:26px 20px 40px;
+}
+.rail-brand{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+.rail-brand b{
+  font-family:var(--f-display);font-weight:700;font-size:19px;
+  letter-spacing:-.02em;color:var(--ink);
+}
+.rail-brand span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+
+.rail-group{margin-bottom:20px}
+.rail-group > h4{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  margin:0 0 7px;padding-left:2px;
+}
+.rail-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.rail-list a{
+  display:grid;grid-template-columns:16px 1fr;align-items:baseline;gap:8px;
+  padding:4px 7px;border-radius:4px;
+  color:var(--ink-2);text-decoration:none;font-size:13px;line-height:1.35;
+}
+.rail-list a:hover{background:var(--surface-2);color:var(--ink)}
+.rail-list a.on{background:var(--azul-soft);color:var(--ink);font-weight:600}
+.rail-list a.on .rn{color:var(--azul)}
+.rn{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);font-weight:500}
+
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-left:5px;vertical-align:middle;flex:none}
+.dot.vigente{background:var(--azul)}
+.dot.configurado{background:var(--ok)}
+.dot.borrador{background:var(--draft)}
+.dot.verificar{background:var(--warn)}
+.dot.fuera{background:var(--out)}
+
+.rail-legend{border-top:1px solid var(--line-soft);padding-top:14px;margin-top:4px}
+.rail-legend p{
+  display:flex;align-items:center;gap:7px;margin:0 0 5px;
+  font-size:11.5px;color:var(--ink-3);
+}
+.rail-legend .dot{margin-left:0}
+
+/* ============ MAIN ============ */
+.doc{padding:0 clamp(20px,4vw,60px) 120px;min-width:0}
+
+/* --- masthead --- */
+.mast{padding:52px 0 30px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:var(--f-mono);font-size:11px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--naranja);
+  margin:0 0 14px;
+}
+.mast h1{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(32px,4.6vw,52px);line-height:1.04;letter-spacing:-.032em;
+  margin:0 0 16px;text-wrap:balance;max-width:16ch;
+}
+.mast .lede{font-size:16.5px;line-height:1.62;color:var(--ink-2);max-width:62ch;margin:0}
+.mast .lede strong{color:var(--ink);font-weight:600}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  gap:0;margin-top:34px;border-top:1px solid var(--line-soft);
+}
+.fact{padding:16px 18px 14px;border-right:1px solid var(--line-soft)}
+.fact:last-child{border-right:0}
+.fact dt{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 5px;
+}
+.fact dd{
+  margin:0;font-family:var(--f-display);font-weight:600;font-size:17px;
+  letter-spacing:-.015em;font-variant-numeric:tabular-nums;
+}
+.fact dd small{display:block;font-family:var(--f-body);font-weight:400;font-size:12px;letter-spacing:0;color:var(--ink-3);margin-top:2px}
+
+/* --- sections --- */
+section{padding-top:56px;scroll-margin-top:20px}
+.sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sec-num{
+  font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.1em;
+  color:var(--naranja);padding-top:3px;
+}
+h2{
+  font-family:var(--f-display);font-weight:700;font-size:clamp(23px,2.6vw,30px);
+  letter-spacing:-.025em;line-height:1.14;margin:0;text-wrap:balance;
+}
+h3{
+  font-family:var(--f-display);font-weight:600;font-size:17px;letter-spacing:-.012em;
+  margin:34px 0 10px;text-wrap:balance;
+}
+h4{
+  font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);margin:26px 0 9px;
+}
+.sec-sub{color:var(--ink-2);max-width:66ch;margin:0 0 22px;font-size:15px}
+p{max-width:66ch;margin:0 0 14px}
+.doc > section > p + p{margin-top:-2px}
+
+/* --- chips --- */
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;white-space:nowrap;
+}
+.chip.vigente{background:var(--azul-soft);color:var(--azul)}
+.chip.configurado{background:var(--ok-bg);color:var(--ok)}
+.chip.borrador{background:var(--draft-bg);color:var(--draft)}
+.chip.verificar{background:var(--warn-bg);color:var(--warn)}
+.chip.fuera{background:var(--out-bg);color:var(--out)}
+
+code,.mono{font-family:var(--f-mono);font-size:.87em;background:var(--surface-2);padding:1px 5px;border-radius:3px;border:1px solid var(--line-soft)}
+
+/* --- cards --- */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:var(--shadow);
+}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(216px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(172px,1fr))}
+
+/* --- callout --- */
+.callout{
+  border-left:3px solid var(--naranja);background:var(--naranja-soft);
+  padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;margin:22px 0;
+}
+.callout h4{margin:0 0 7px;color:var(--naranja)}
+.callout p{margin:0;max-width:64ch;font-size:14.5px}
+.callout p + p{margin-top:9px}
+
+.note{
+  border-left:3px solid var(--azul);background:var(--azul-soft);
+  padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;margin:22px 0;
+}
+.note h4{margin:0 0 7px;color:var(--azul)}
+.note p{margin:0;max-width:64ch;font-size:14.5px}
+
+/* --- tables --- */
+.tw{overflow-x:auto;margin:14px 0 4px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:min(100%,520px)}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+thead th{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);background:var(--surface-2);
+  border-bottom:1px solid var(--line);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+td strong{font-weight:600}
+.mut{color:var(--ink-3)}
+
+/* --- funnel --- */
+.funnel{
+  display:flex;gap:0;flex-wrap:wrap;margin:20px 0 8px;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+  overflow:hidden;
+}
+.fstep{
+  flex:1 1 148px;min-width:148px;padding:16px 16px 15px;
+  border-right:1px solid var(--line-soft);position:relative;
+}
+.fstep:last-child{border-right:0}
+.fstep .fn{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;color:var(--naranja);
+  display:block;margin-bottom:7px;
+}
+.fstep b{
+  display:block;font-family:var(--f-display);font-weight:600;font-size:14px;
+  letter-spacing:-.01em;line-height:1.25;margin-bottom:4px;
+}
+.fstep span{display:block;font-size:12px;color:var(--ink-3);line-height:1.42}
+
+/* --- stage rail (pipeline) --- */
+.stages{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden;margin:14px 0}
+.stage{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.stage:last-child{border-bottom:0}
+.stage .si{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.stage b{font-weight:600;font-size:14px;display:block}
+.stage span{font-size:13px;color:var(--ink-2)}
+
+/* --- decision checklist --- */
+.decs{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden;margin:18px 0}
+.dec{display:grid;grid-template-columns:auto 1fr;gap:13px;padding:13px 17px;border-bottom:1px solid var(--line-soft);align-items:start;cursor:pointer}
+.dec:last-child{border-bottom:0}
+.dec:hover{background:var(--surface-2)}
+.dec input{
+  appearance:none;width:16px;height:16px;margin:4px 0 0;flex:none;
+  border:1.5px solid var(--line);border-radius:3px;background:var(--surface);
+  cursor:pointer;position:relative;transition:background .12s,border-color .12s;
+}
+.dec input:checked{background:var(--ok);border-color:var(--ok)}
+.dec input:checked::after{
+  content:"";position:absolute;left:4.5px;top:1px;width:4px;height:9px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);
+}
+.dec b{display:block;font-weight:600;font-size:14px;margin-bottom:1px}
+.dec span{display:block;font-size:13px;color:var(--ink-2)}
+.dec input:checked ~ .dtxt{opacity:.45;text-decoration:line-through;text-decoration-color:var(--ink-3)}
+.dec-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  padding:12px 17px;background:var(--surface-2);border-bottom:1px solid var(--line);
+}
+.dec-bar p{margin:0;font-size:13px;color:var(--ink-2);max-width:none}
+.dec-bar b{font-family:var(--f-display);font-weight:700;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+.dec-reset{
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:none;border:1px solid var(--line);color:var(--ink-3);
+  padding:4px 10px;border-radius:3px;cursor:pointer;
+}
+.dec-reset:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* --- rules list --- */
+.rules{list-style:none;margin:14px 0;padding:0;display:flex;flex-direction:column;gap:9px}
+.rules li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14.5px;max-width:68ch;align-items:baseline}
+.rules li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--naranja);margin-top:8px}
+.rules.blue li::before{background:var(--azul)}
+
+/* --- claims columns --- */
+.claim{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.claim > h5{margin:0;padding:10px 15px;font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+.claim.ok > h5{background:var(--ok-bg);color:var(--ok)}
+.claim.cond > h5{background:var(--warn-bg);color:var(--warn)}
+.claim.no > h5{background:var(--naranja-soft);color:var(--naranja)}
+.claim ul{margin:0;padding:12px 15px 14px 30px;font-size:13.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:5px}
+
+/* --- pre --- */
+pre{
+  font-family:var(--f-mono);font-size:12.5px;line-height:1.6;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;overflow-x:auto;margin:12px 0;color:var(--ink-2);
+}
+pre b{color:var(--ink);font-weight:500}
+
+/* --- diagramas --- */
+figure{margin:24px 0 26px;padding:0}
+.dgwrap{
+  overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);padding:20px 22px;
+}
+.dg{display:block;margin:0 auto;min-width:520px;max-width:100%;height:auto;color:var(--ink)}
+figcaption{margin-top:11px;font-size:12.5px;line-height:1.55;color:var(--ink-3);max-width:72ch}
+figcaption b{color:var(--ink-2);font-weight:600}
+
+.dg text{font-family:var(--f-body);font-size:12.5px;font-weight:600;fill:currentColor}
+.dg .sm{font-size:10.5px;font-weight:400;fill:var(--ink-3)}
+.dg .azul{font-size:10.5px;font-weight:500;fill:var(--azul)}
+.dg .mn{font-family:var(--f-mono);font-size:10px;font-weight:400;letter-spacing:.05em;fill:var(--ink-3)}
+.dg .mn-hot{font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:.05em;fill:var(--naranja)}
+.dg .big{font-size:13px;font-weight:700;fill:currentColor}
+
+.dg .bx{fill:var(--surface-2);stroke:var(--line);stroke-width:1.25}
+.dg .bx-hot{fill:var(--naranja-soft);stroke:var(--naranja);stroke-width:1.5}
+.dg .bx-cool{fill:var(--azul-soft);stroke:var(--azul);stroke-width:1.25}
+.dg .bx-gate{fill:none;stroke:var(--ink-3);stroke-width:1.25;stroke-dasharray:5 4}
+
+.dg .cn{stroke:currentColor;stroke-width:1.25;fill:none}
+.dg .cn-dash{stroke:var(--ink-3);stroke-width:1.25;fill:none;stroke-dasharray:5 4}
+.dg .cn-hot{stroke:var(--naranja);stroke-width:1.6;fill:none}
+.dg .cn-hot-dash{stroke:var(--naranja);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+.dg .dv{stroke:var(--line);stroke-width:1;fill:none}
+.dg .x{stroke:var(--naranja);stroke-width:2.2;fill:none;stroke-linecap:round}
+
+.dg .ah{fill:currentColor;stroke:none}
+.dg .ah-hot{fill:var(--naranja);stroke:none}
+.dg .ah-mut{fill:var(--ink-3);stroke:none}
+.dg .dotf{fill:var(--azul);stroke:none}
+.dg .doto{fill:var(--surface);stroke:var(--azul);stroke-width:1.5}
+.dg .dotm{fill:none;stroke:var(--ink-3);stroke-width:1.5}
+
+.dg .bar{fill:var(--azul)}
+.dg .hit{fill:transparent}
+.dg .barrow:hover .hit{fill:var(--surface-2)}
+.dg .base{stroke:var(--line);stroke-width:1;fill:none}
+
+/* --- huecos de documentación --- */
+.todo{
+  display:inline-block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;
+  color:var(--ink-3);border:1px dashed var(--line);border-radius:3px;padding:1px 7px;
+  white-space:nowrap;
+}
+.chip.critico{background:var(--naranja-soft);color:var(--naranja)}
+
+/* --- footer --- */
+.foot{margin-top:76px;padding-top:22px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12.5px}
+.foot p{max-width:70ch;margin:0 0 6px}
+
+/* --- mobile nav toggle --- */
+.mobnav{display:none}
+
+@media (max-width:940px){
+  .shell{grid-template-columns:1fr}
+  .rail{
+    position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);
+    padding:18px 20px 20px;
+  }
+  .rail-body{display:none}
+  .rail-body.open{display:block;margin-top:16px}
+  .mobnav{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    background:none;border:1px solid var(--line);color:var(--ink-2);
+    padding:6px 12px;border-radius:4px;cursor:pointer;margin-top:12px;
+  }
+  .mobnav:hover{color:var(--ink);border-color:var(--ink-3)}
+  .doc{padding-left:20px;padding-right:20px}
+  .mast{padding-top:34px}
+  .fact{border-right:0;border-bottom:1px solid var(--line-soft)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="shell">
+
+  <!-- ================= RAIL ================= -->
+  <aside class="rail">
+    <div class="rail-brand">
+      <b>PAGUREO</b>
+      <span>Dossier · corte 27 ago 2026</span>
+    </div>
+    <button class="mobnav" id="navBtn" aria-expanded="false" aria-controls="railBody">Índice ▾</button>
+
+    <div class="rail-body" id="railBody">
+      <nav>
+        <div class="rail-group">
+          <h4>Panorama</h4>
+          <ul class="rail-list">
+            <li><a href="#estado"><span class="rn">··</span><span>Estado del sistema</span></a></li>
+            <li><a href="#embudo"><span class="rn">··</span><span>El embudo</span></a></li>
+          </ul>
+        </div>
+
+        <div class="rail-group">
+          <h4>A · Qué se vende y a quién</h4>
+          <ul class="rail-list">
+            <li><a href="#d01"><span class="rn">01</span><span>Resumen ejecutivo<span class="dot vigente"></span></span></a></li>
+            <li><a href="#d02"><span class="rn">02</span><span>Cliente ideal<span class="dot vigente"></span></span></a></li>
+            <li><a href="#d03"><span class="rn">03</span><span>Catálogo y reglas<span class="dot verificar"></span></span></a></li>
+          </ul>
+        </div>
+
+        <div class="rail-group">
+          <h4>B · Cómo se compra el tráfico</h4>
+          <ul class="rail-list">
+            <li><a href="#d04"><span class="rn">04</span><span>Campaña Meta<span class="dot borrador"></span></span></a></li>
+            <li><a href="#d05"><span class="rn">05</span><span>Los 10 anuncios<span class="dot borrador"></span></span></a></li>
+          </ul>
+        </div>
+
+        <div class="rail-group">
+          <h4>C · Lo que ve el cliente</h4>
+          <ul class="rail-list">
+            <li><a href="#d06"><span class="rn">06</span><span>Formulario Meta<span class="dot configurado"></span></span></a></li>
+            <li><a href="#d11"><span class="rn">11</span><span>11 plantillas WhatsApp<span class="dot borrador"></span></span></a></li>
+            <li><a href="#d12"><span class="rn">12</span><span>7 emails<span class="dot configurado"></span></span></a></li>
+          </ul>
+        </div>
+
+        <div class="rail-group">
+          <h4>D · La operación</h4>
+          <ul class="rail-list">
+            <li><a href="#d07"><span class="rn">07</span><span>Experiencia del lead<span class="dot vigente"></span></span></a></li>
+            <li><a href="#d08"><span class="rn">08</span><span>Conversation AI<span class="dot configurado"></span></span></a></li>
+            <li><a href="#d09"><span class="rn">09</span><span>CRM y pipeline<span class="dot verificar"></span></span></a></li>
+            <li><a href="#d10"><span class="rn">10</span><span>Workflows<span class="dot borrador"></span></span></a></li>
+            <li><a href="#d13"><span class="rn">13</span><span>Tracking Shopify<span class="dot configurado"></span></span></a></li>
+          </ul>
+        </div>
+
+        <div class="rail-group">
+          <h4>E · Cómo se lanza</h4>
+          <ul class="rail-list">
+            <li><a href="#d14"><span class="rn">14</span><span>Pruebas y QA<span class="dot verificar"></span></span></a></li>
+            <li><a href="#decisiones"><span class="rn">15</span><span>Tus 10 decisiones<span class="dot verificar"></span></span></a></li>
+            <li><a href="#activacion"><span class="rn">15</span><span>Orden de activación<span class="dot verificar"></span></span></a></li>
+            <li><a href="#riesgos"><span class="rn">15</span><span>Riesgos vivos<span class="dot verificar"></span></span></a></li>
+          </ul>
+        </div>
+
+        <div class="rail-group">
+          <h4>F · Para el equipo técnico</h4>
+          <ul class="rail-list">
+            <li><a href="#devops-stack"><span class="rn">··</span><span>Mapa del stack<span class="dot verificar"></span></span></a></li>
+            <li><a href="#devops-contratos"><span class="rn">··</span><span>Contratos de datos<span class="dot configurado"></span></span></a></li>
+            <li><a href="#devops-silencioso"><span class="rn">··</span><span>Fallos silenciosos<span class="dot verificar"></span></span></a></li>
+            <li><a href="#devops-vigencia"><span class="rn">··</span><span>Vigencia y readback<span class="dot verificar"></span></span></a></li>
+            <li><a href="#devops-entornos"><span class="rn">··</span><span>Entornos y pruebas<span class="dot borrador"></span></span></a></li>
+            <li><a href="#devops-pendientes"><span class="rn">··</span><span>Verificaciones pendientes<span class="dot verificar"></span></span></a></li>
+            <li><a href="#devops-datos"><span class="rn">··</span><span>Datos personales<span class="dot fuera"></span></span></a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="rail-legend">
+        <p><span class="dot vigente"></span> Estrategia vigente</p>
+        <p><span class="dot configurado"></span> Configurado, falta readback</p>
+        <p><span class="dot borrador"></span> En borrador</p>
+        <p><span class="dot verificar"></span> Requiere verificación</p>
+        <p><span class="dot fuera"></span> Fuera de alcance</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= DOC ================= -->
+  <main class="doc">
+
+    <header class="mast">
+      <p class="eyebrow">Venta directa · Bogotá · Fase 1</p>
+      <h1>La máquina comercial, antes de encenderla</h1>
+      <p class="lede">Dieciséis documentos describen un sistema completo para vender el sillón reclinable PAGUREO: anuncios, formulario, IA en WhatsApp, CRM, seguimientos y tienda. <strong>Nada de eso está activo.</strong> Todo espera diez confirmaciones tuyas y una relectura de Shopify, Meta y GHL. Esta página ordena qué existe, qué falta y en qué orden se enciende.</p>
+
+      <dl class="facts">
+        <div class="fact"><dt>Producto foco</dt><dd>$2.200.000<small>Sillón reclinable · 4 colores</small></dd></div>
+        <div class="fact"><dt>Presupuesto</dt><dd>$2.000.000<small>mensual · ≈$66.000/día</small></dd></div>
+        <div class="fact"><dt>Mercado</dt><dd>Bogotá<small>prioridad zona Norte</small></dd></div>
+        <div class="fact"><dt>Piezas creadas</dt><dd>41<small>10 ads · 11 WA · 7 emails · 13 links</small></dd></div>
+        <div class="fact"><dt>Bloqueo</dt><dd>10<small>decisiones pendientes</small></dd></div>
+      </dl>
+    </header>
+
+    <!-- ============ ESTADO ============ -->
+    <section id="estado">
+      <div class="sec-head"><span class="sec-num">PANORAMA</span></div>
+      <h2>Estado real del sistema</h2>
+      <p class="sec-sub">El dossier usa cuatro estados y los aplica con disciplina. Ninguno significa «listo para lanzar»: incluso lo <em>configurado</em> exige una relectura de plataforma antes de recibir un lead real.</p>
+
+      <div class="grid g4">
+        <div class="card">
+          <span class="chip vigente">Vigente</span>
+          <p style="margin:11px 0 0;font-size:13.5px;color:var(--ink-2)">La estrategia está definida y no requiere cambios: objetivo, cliente ideal y recorrido del lead.</p>
+          <p style="margin:9px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)">01 · 02 · 07</p>
+        </div>
+        <div class="card">
+          <span class="chip configurado">Configurado</span>
+          <p style="margin:11px 0 0;font-size:13.5px;color:var(--ink-2)">Existe evidencia de que se creó o sincronizó. Falta confirmar que lo que está hoy en la plataforma sigue siendo eso.</p>
+          <p style="margin:9px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)">06 · 08 · 12 · 13</p>
+        </div>
+        <div class="card">
+          <span class="chip borrador">En borrador</span>
+          <p style="margin:11px 0 0;font-size:13.5px;color:var(--ink-2)">Diseñado y listo para revisión o carga, pero no debe operar todavía ni enviar un solo mensaje.</p>
+          <p style="margin:9px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)">04 · 05 · 10 · 11</p>
+        </div>
+        <div class="card">
+          <span class="chip verificar">Verificar</span>
+          <p style="margin:11px 0 0;font-size:13.5px;color:var(--ink-2)">Depende de una lectura actual de plataforma, una condición comercial, una aprobación o una prueba interna.</p>
+          <p style="margin:9px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)">03 · 09 · 14 · 15</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>Regla que atraviesa los 16 documentos</h4>
+        <p>Shopify y la política comercial vigente <strong>mandan sobre cualquier anuncio, guion, chat, reunión o memoria</strong>. Si dos fuentes se contradicen, se detiene la promesa y se valida antes de responder. Por eso ningún email lleva precio fijo y ningún copy aprobado autoriza por sí mismo una promesa comercial.</p>
+      </div>
+
+      <div class="note">
+        <h4>Separación de marca</h4>
+        <p><strong>Pagurai está fuera de alcance.</strong> Puede vivir en la misma subcuenta de GHL, pero no comparte pipeline, base de conocimiento, workflow, mensajes ni lógica comercial. Todo elemento ejecutable de PAGUREO lleva la etiqueta <code>brand_pagureo</code> como condición explícita.</p>
+      </div>
+    </section>
+
+    <!-- ============ EMBUDO ============ -->
+    <section id="embudo">
+      <div class="sec-head"><span class="sec-num">PANORAMA</span></div>
+      <h2>El embudo, de principio a fin</h2>
+      <p class="sec-sub">Una sola ruta principal. La IA conversa y califica; los workflows solo controlan entrada, consentimiento, cadencia, handoff y medición — nunca simulan una conversación.</p>
+
+      <div class="funnel">
+        <div class="fstep"><span class="fn">01</span><b>Meta Ads</b><span>10 anuncios en 6 campañas. Salida inicial con 5.</span></div>
+        <div class="fstep"><span class="fn">02</span><b>Formulario</b><span>Alta intención. 3 preguntas: perfil, dolor, etapa.</span></div>
+        <div class="fstep"><span class="fn">03</span><b>GHL</b><span>Contacto, campos, tags y oportunidad. Espera 5 min.</span></div>
+        <div class="fstep"><span class="fn">04</span><b>WhatsApp IA</b><span>Utility de registro, luego Conversation AI.</span></div>
+        <div class="fstep"><span class="fn">05</span><b>Trigger Link</b><span>Enlace interno rastreable. Nunca una URL directa.</span></div>
+        <div class="fstep"><span class="fn">06</span><b>Shopify</b><span>Ficha o checkout, según intención confirmada.</span></div>
+        <div class="fstep"><span class="fn">07</span><b>Cierre</b><span>Compra, seguimiento de 14 días o asesor humano.</span></div>
+      </div>
+
+      <h3>Ruta secundaria: anuncio directo a WhatsApp</h3>
+      <p>Si el lead entra por Click-to-WhatsApp no pasó por el formulario, así que faltan los tres campos de Meta. La IA <strong>no interroga</strong>: detecta qué falta, responde primero la intención real y recoge perfil, dolor, etapa, ciudad, plazo y pago <em>una pregunta por turno</em>, solo cuando hace falta para avanzar.</p>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 900 390" role="img" aria-label="Las dos rutas de entrada convergen en un interruptor que evalúa si el lead respondió. Sin respuesta entra a la cadencia de 14 días, que revalida el interruptor antes de cada envío. Con respuesta, la conversación pasa a Conversation AI. Un mensaje entrante desde Click-to-WhatsApp ya cuenta como respuesta y va directo a la IA.">
+            <defs>
+              <marker id="d1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+              <marker id="d1h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-hot" points="0,1 10,5 0,9"/></marker>
+              <marker id="d1m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-mut" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <!-- fila 1: ruta Meta -->
+            <rect class="bx" x="20" y="24" width="98" height="42" rx="3"/>
+            <text x="69" y="50" text-anchor="middle">Meta Ads</text>
+
+            <rect class="bx" x="148" y="24" width="132" height="42" rx="3"/>
+            <text x="214" y="41" text-anchor="middle">Formulario</text>
+            <text class="sm" x="214" y="56" text-anchor="middle">3 campos</text>
+
+            <rect class="bx" x="310" y="24" width="150" height="42" rx="3"/>
+            <text x="385" y="41" text-anchor="middle">GHL</text>
+            <text class="sm" x="385" y="56" text-anchor="middle">contacto · oportunidad</text>
+
+            <rect class="bx-gate" x="490" y="24" width="104" height="42" rx="3"/>
+            <text x="542" y="41" text-anchor="middle">espera</text>
+            <text class="sm" x="542" y="56" text-anchor="middle">5 minutos</text>
+
+            <rect class="bx" x="624" y="24" width="152" height="42" rx="3"/>
+            <text x="700" y="41" text-anchor="middle">Utility</text>
+            <text class="mn" x="700" y="56" text-anchor="middle">pg_registro</text>
+
+            <path class="cn" d="M118,45 L144,45" marker-end="url(#d1a)"/>
+            <path class="cn" d="M280,45 L306,45" marker-end="url(#d1a)"/>
+            <path class="cn" d="M460,45 L486,45" marker-end="url(#d1a)"/>
+            <path class="cn" d="M594,45 L620,45" marker-end="url(#d1a)"/>
+            <path class="cn" d="M700,66 L700,108" marker-end="url(#d1a)"/>
+
+            <!-- el interruptor -->
+            <rect class="bx-hot" x="520" y="112" width="280" height="46" rx="3"/>
+            <text x="660" y="140" text-anchor="middle">¿el lead respondió?</text>
+
+            <!-- ruta directa -->
+            <rect class="bx" x="20" y="112" width="200" height="46" rx="3"/>
+            <text x="120" y="131" text-anchor="middle">Anuncio directo</text>
+            <text class="sm" x="120" y="146" text-anchor="middle">Click-to-WhatsApp</text>
+
+            <!-- salidas del interruptor -->
+            <path class="cn-hot" d="M700,158 L700,218" marker-end="url(#d1h)"/>
+            <text class="mn-hot" x="710" y="192">sí</text>
+
+            <path class="cn" d="M580,158 L580,192 L390,192 L390,218" marker-end="url(#d1a)"/>
+            <text class="mn" x="486" y="184" text-anchor="middle">sin respuesta</text>
+
+            <!-- fila 3 -->
+            <rect class="bx" x="300" y="222" width="180" height="54" rx="3"/>
+            <text x="390" y="244" text-anchor="middle">Cadencia 14 días</text>
+            <text class="sm" x="390" y="260" text-anchor="middle">WhatsApp + email</text>
+
+            <rect class="bx-hot" x="590" y="222" width="210" height="54" rx="3"/>
+            <text x="695" y="244" text-anchor="middle">Conversation AI</text>
+            <text class="sm" x="695" y="260" text-anchor="middle">responde y califica</text>
+
+            <!-- el bucle: la cadencia revalida el interruptor -->
+            <path class="cn-dash" d="M300,249 L272,249 L272,135 L514,135" marker-end="url(#d1m)"/>
+            <text class="mn" x="396" y="127" text-anchor="middle">revalida antes de cada envío</text>
+
+            <!-- entrada directa a la IA -->
+            <path class="cn" d="M220,158 L240,158 L240,352 L695,352 L695,280" marker-end="url(#d1a)"/>
+            <text class="mn" x="470" y="370" text-anchor="middle">el mensaje entrante ya cuenta como respuesta</text>
+          </svg>
+        </div>
+        <figcaption><b>Una respuesta apaga la automatización.</b> El interruptor no se evalúa una sola vez: la cadencia vuelve a pasar por él antes de cada uno de sus nueve envíos, y en cuanto la persona escribe, el control pasa a Conversation AI y no regresa. Por eso ningún workflow puede responder chats — competiría con la IA por el mismo turno.</figcaption>
+      </figure>
+
+      <div class="note">
+        <h4>El principio de experiencia</h4>
+        <p>Una persona no debe sentir que entró a un cuestionario. Si dice «quiero comprar el naranja», la IA confirma lo indispensable para cerrar — referencia, precio vigente, ciudad, pago — y <strong>no la devuelve a una encuesta inicial</strong>.</p>
+      </div>
+    </section>
+
+    <!-- ============ 01 ============ -->
+    <section id="d01">
+      <div class="sec-head"><span class="sec-num">01</span><span class="chip vigente">Estrategia vigente</span></div>
+      <h2>Qué se está intentando probar</h2>
+      <p class="sec-sub">Resumen ejecutivo de la estrategia.</p>
+
+      <p>El objetivo de los primeros 30 días <strong>no es maximizar volumen barato</strong>. Es identificar la combinación de anuncio, perfil, dolor y seguimiento que produce compra rentable. El resultado esperado es una operación donde de cada lead se pueda responder: de qué anuncio llegó, qué problema quiere resolver, si respondió en WhatsApp, qué producto revisó, si abrió checkout y qué impidió o habilitó su compra.</p>
+
+      <h3>Cómo se lee el éxito</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Etapa</th><th>Medida principal</th><th>Qué revela</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Anuncio</strong></td><td>CTR, CPM, CPC, calidad del comentario</td><td>Relevancia del ángulo y del creativo</td></tr>
+            <tr><td><strong>Formulario</strong></td><td>Apertura, finalización, costo por lead</td><td>Capacidad de capturar interés real</td></tr>
+            <tr><td><strong>WhatsApp</strong></td><td>Respuesta, campos completos, tiempo de 1ª respuesta</td><td>Calidad de la conversación y calificación</td></tr>
+            <tr><td><strong>Shopify</strong></td><td>Clic a ficha, clic a checkout, checkout iniciado</td><td>Intención comercial concreta</td></tr>
+            <tr><td><strong>Venta</strong></td><td>Compras, CAC, ROAS</td><td>Viabilidad económica de la campaña</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px"><strong>La optimización se hace por avance real hacia Shopify y venta, no por CPL.</strong> Un lead barato que no responde ni visita producto no es una señal de éxito.</p>
+
+      <h3>Límites que no se negocian</h3>
+      <ul class="rules">
+        <li>La IA informa <strong>solo datos confirmados</strong> en la base de conocimiento vigente.</li>
+        <li>Descuentos, negociaciones, compras múltiples, excepciones y transferencias <strong>se trasladan a un asesor</strong>.</li>
+        <li>La IA nunca inventa precio, inventario, medida, cobertura, entrega, garantía, cupo ni aprobación Addi.</li>
+        <li>Los workflows no reemplazan a la IA como vendedora.</li>
+      </ul>
+    </section>
+
+    <!-- ============ 02 ============ -->
+    <section id="d02">
+      <div class="sec-head"><span class="sec-num">02</span><span class="chip vigente">Estrategia vigente</span></div>
+      <h2>A quién le habla</h2>
+      <p class="sec-sub">El hallazgo central: la compra no se presenta como sustitución técnica de una silla, sino como mejora del entorno desde donde alguien trabaja, crea, se comunica y descansa.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Segmento</th><th>Situación</th><th>Mensaje que conecta</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Profesional remoto</strong></td><td>Reuniones, clientes, jornada híbrida desde casa</td><td>«Tu trabajo creció; tu espacio también debe hacerlo»</td></tr>
+            <tr><td><strong>Freelancer / emprendedor</strong></td><td>La casa es oficina, estudio y base de operaciones</td><td>«Tu espacio también forma parte de tu negocio»</td></tr>
+            <tr><td><strong>Developer / creativo / gamer</strong></td><td>Bloques largos de pantalla, creación, juego y pausas</td><td>«Tu día no tiene una sola posición»</td></tr>
+            <tr><td><strong>Comprador de diseño</strong></td><td>Quiere transformar un rincón y que se vea propio</td><td>«El color y la pieza correcta cambian el ambiente»</td></tr>
+            <tr><td><strong>Sensible al pago</strong></td><td>Aplaza la mejora por forma de pago</td><td>«Revisa alternativas antes de descartar la mejora»</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Las siete objeciones y su respuesta correcta</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Objeción</th><th>Lo que realmente pide</th><th>Respuesta</th></tr></thead>
+          <tbody>
+            <tr><td>«Está caro»</td><td>Justificar valor, ver alternativa de pago</td><td>Reconocer la inversión, explicar función, consultar Addi. Descuentos → asesor.</td></tr>
+            <tr><td>«Quiero cuotas»</td><td>Saber si puede acceder</td><td>Addi desde 0% de interés, sujeta a aprobación. <strong>Nunca prometer cupo o cuota.</strong></td></tr>
+            <tr><td>«No sé si cabe»</td><td>Reducir riesgo de compra</td><td>Medidas solo si están verificadas; pedir medidas del espacio o escalar.</td></tr>
+            <tr><td>«Qué colores hay»</td><td>Elegir sin frustración</td><td>Revisar disponibilidad actual por color antes de recomendar.</td></tr>
+            <tr><td>«Cuándo llega»</td><td>Reducir incertidumbre logística</td><td>No prometer fecha; verificar política y ciudad o escalar.</td></tr>
+            <tr><td>«Hay descuento»</td><td>Buscar condición comercial</td><td>Solo oferta vigente, o escalar a asesor.</td></tr>
+            <tr><td>«Quiero transferir»</td><td>Cerrar por otro método</td><td>No usar datos ficticios. Escalar con contexto al canal humano.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <h4>Lenguaje prohibido</h4>
+        <p>Diagnósticos médicos, alivio de dolor o corrección de columna · «últimas unidades» sin inventario comprobado · «precio de lanzamiento» sin monto y fecha aprobados · entrega inmediata, envío incluido, cobertura nacional o garantía de un año sin leer la condición vigente · cuotas, cupos o elegibilidad Addi sin confirmación · comparaciones despectivas con una silla genérica.</p>
+      </div>
+    </section>
+
+    <!-- ============ 03 ============ -->
+    <section id="d03">
+      <div class="sec-head"><span class="sec-num">03</span><span class="chip verificar">Requiere verificación antes de lanzar</span></div>
+      <h2>Catálogo, oferta y reglas comerciales</h2>
+      <p class="sec-sub">Snapshot del 31 de julio de 2026. Es el documento más frágil del dossier: cada cifra debe releerse de Shopify el día de activar.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Producto</th><th class="num">Precio observado</th><th>Estado</th><th>Compra directa</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sillón reclinable</strong> azul oscuro</td><td class="num">$2.200.000</td><td><span class="chip configurado">Disponible</span></td><td>Sí, tras confirmar referencia</td></tr>
+            <tr><td><strong>Sillón reclinable</strong> naranja</td><td class="num">$2.200.000</td><td><span class="chip configurado">Disponible</span></td><td>Sí, tras confirmar referencia</td></tr>
+            <tr><td><strong>Sillón reclinable</strong> crema en lino</td><td class="num">$2.200.000</td><td><span class="chip configurado">Disponible</span></td><td>Sí, tras confirmar referencia</td></tr>
+            <tr><td><strong>Sillón reclinable</strong> gris</td><td class="num">$2.200.000</td><td><span class="chip configurado">Disponible</span></td><td>Sí, tras confirmar referencia</td></tr>
+            <tr><td>Escritorio ergonómico multifuncional</td><td class="num">$1.100.000</td><td><span class="chip configurado">Disponible</span></td><td>Solo si es la recomendación correcta</td></tr>
+            <tr><td class="mut">Escritorio gamer ergonómico</td><td class="num mut">$1.200.000</td><td><span class="chip fuera">Agotado</span></td><td class="mut">No enviar checkout</td></tr>
+            <tr><td class="mut">Escritorio elevable eléctrico</td><td class="num mut">$1.600.000</td><td><span class="chip fuera">Agotado</span></td><td class="mut">No enviar checkout</td></tr>
+            <tr><td class="mut">Silla ergonómica acolchada</td><td class="num mut">$1.650.000</td><td><span class="chip fuera">Agotada</span></td><td class="mut">No enviar checkout</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <h4>Tres cifras en conflicto</h4>
+        <p>El material comercial local usa <strong>$3.200.000</strong> como precio comparativo de los sillones. Su uso en anuncios o conversaciones <strong>requiere verificación el día de activación</strong> — si no está activo en la ficha, no puede presentarse como ahorro.</p>
+        <p>El ticket de <strong>$1.700.000</strong> que aparece en una reunión de julio es histórico. No debe usarse como precio actual bajo ninguna circunstancia.</p>
+      </div>
+
+      <h3>Addi: la única formulación autorizada</h3>
+      <pre>Financiación con Addi <b>desde 0% de interés</b>, sujeta a aprobación
+y condiciones vigentes de Addi.</pre>
+      <p>No se promete cuota, cupo, plazo, aprobación, vigencia, producto elegible ni resultado de la solicitud. Si se requiere detalle transaccional, la IA usa información vigente confirmada o escala a asesor.</p>
+
+      <h3>Qué se puede decir</h3>
+      <div class="grid g3">
+        <div class="claim ok">
+          <h5>Permitido con fuente vigente</h5>
+          <ul>
+            <li>Reclinación</li>
+            <li>Giro 360°</li>
+            <li>Referencias por color</li>
+            <li>Diseño para trabajo y descanso</li>
+            <li>Precio público actual</li>
+            <li>Oferta vigente confirmada</li>
+          </ul>
+        </div>
+        <div class="claim cond">
+          <h5>Condicionado — confirmar antes</h5>
+          <ul>
+            <li>Garantía del fabricante</li>
+            <li>Disponibilidad por color</li>
+            <li>Precio comparativo</li>
+            <li>Tiempos y costos de entrega</li>
+            <li>Devoluciones y cobertura</li>
+            <li>Medidas y materiales</li>
+          </ul>
+        </div>
+        <div class="claim no">
+          <h5>Bloqueado siempre</h5>
+          <ul>
+            <li>Beneficio médico o postural</li>
+            <li>Escasez no confirmada</li>
+            <li>Entrega inmediata</li>
+            <li>Envío gratuito</li>
+            <li>Garantía de un año sin documento</li>
+            <li>Aprobación Addi garantizada</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 ============ -->
+    <section id="d04">
+      <div class="sec-head"><span class="sec-num">04</span><span class="chip borrador">En borrador</span></div>
+      <h2>Cómo se compra el tráfico</h2>
+      <p class="sec-sub">Ventana de validación de 14 días para leer el sistema; 30 días para evaluar la ventana comercial. Las primeras 48–72 horas solo sirven para confirmar entrega, tracking y calidad de lead.</p>
+
+      <h3>Reparto del presupuesto</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Concepto</th><th class="num">Propuesta</th><th>Regla</th></tr></thead>
+          <tbody>
+            <tr><td>Presupuesto mensual</td><td class="num">$2.000.000</td><td>Requiere confirmación antes de activar gasto</td></tr>
+            <tr><td>Diario aproximado</td><td class="num">$66.000</td><td>Ajustar al real, sin forzar exactitud matemática</td></tr>
+            <tr><td><strong>Producto directo</strong></td><td class="num">60%</td><td>Producto, color, funciones y oferta vigente</td></tr>
+            <tr><td><strong>Dolores de trabajo remoto</strong></td><td class="num">40%</td><td>Espacio temporal, rutina estática, presencia, pausa</td></tr>
+            <tr><td>Retargeting</td><td class="num">hasta 20%</td><td>Solo con audiencia suficiente. <strong>Sale del presupuesto, no se suma.</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Seis campañas</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Campaña</th><th>Propósito</th><th>Creativo</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td><code>C01</code> Producto directo</td><td>Mostrar sillón, funciones, colores</td><td>Video producto + foto 4:5</td><td><span class="chip borrador">Borrador</span></td></tr>
+            <tr><td><code>C02</code> Dolores remotos</td><td>Abrir la necesidad de mejorar el espacio</td><td>Problema-solución, lifestyle</td><td><span class="chip borrador">Borrador</span></td></tr>
+            <tr><td><code>C03</code> Educación funcional</td><td>Demostrar reclinación y giro</td><td>Video corto / carrusel</td><td><span class="chip borrador">Borrador</span></td></tr>
+            <tr><td><code>C04</code> Diccionario A</td><td>Probar concepto de lenguaje del espacio</td><td>Video/foto A</td><td><span class="chip verificar">Faltan artes</span></td></tr>
+            <tr><td><code>C05</code> Diccionario B</td><td>Prueba A/B del mismo concepto</td><td>Video/foto B</td><td><span class="chip verificar">Faltan artes</span></td></tr>
+            <tr><td><code>C06</code> Retargeting</td><td>Resolver una duda antes de decidir</td><td>Video / carrusel objeciones</td><td><span class="chip fuera">Condicionado</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Convención de nombres y UTM</h3>
+      <pre>Campaña   <b>PGR_SILLON_C01_PRODUCTO_V1</b>
+Conjunto  <b>PGR_BOGOTA_NORTE_PRODUCTO_V1</b>
+Anuncio   <b>PGR_SILLON_AD01_TRABAJO_CRECIO_V1</b>
+Formulario <b>PAGUREO | Sillón | Alta intención</b>
+
+utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}
+&utm_content={{ad.name}}&utm_term={{adset.name}}</pre>
+      <p><strong>No se cambia el nombre de un anuncio ganador durante aprendizaje</strong>, salvo error crítico. La estabilidad es lo que permite leer Meta, GHL y Shopify en conjunto.</p>
+
+      <h3>Cómo se lee una señal</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Señal</th><th>Lectura</th><th>Acción posible</th></tr></thead>
+          <tbody>
+            <tr><td>CTR bajo</td><td>Hook, creativo o audiencia no conectan</td><td>Cambiar ángulo o primer plano</td></tr>
+            <tr><td>Formulario abierto, no completado</td><td>Intercambio de valor insuficiente</td><td>Ajustar título/descripción sin romper el mapeo</td></tr>
+            <tr><td>Lead alto, poca respuesta WhatsApp</td><td>Confirmación o expectativa desalineada</td><td>Revisar Utility, consentimiento y primer mensaje</td></tr>
+            <tr><td>Respuesta alta, poco clic Shopify</td><td>La IA no resuelve la duda</td><td>Revisar entrenamiento y contexto comercial</td></tr>
+            <tr><td>Clic a checkout sin ventas</td><td>Oferta, pago, logística o confianza</td><td><strong>Auditar ruta de compra antes de escalar gasto</strong></td></tr>
+            <tr><td>Ventas con CAC aceptable</td><td>Hipótesis validada</td><td>Escalar gradualmente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 05 ============ -->
+    <section id="d05">
+      <div class="sec-head"><span class="sec-num">05</span><span class="chip borrador">En borrador</span></div>
+      <h2>Los diez anuncios</h2>
+      <p class="sec-sub">Copy completo listo para pegar en Meta. La salida inicial recomendada usa cinco: <strong>AD01, AD03, AD05, AD07 y AD09</strong>. Los demás quedan como pruebas controladas o retargeting.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Ad</th><th>Ángulo</th><th>Hook</th><th>Formato</th></tr></thead>
+          <tbody>
+            <tr><td><strong>AD01</strong> ★</td><td>Ambición profesional</td><td>«Tu trabajo creció. ¿Tu espacio todavía parece temporal?»</td><td>Video vertical 20–30 s</td></tr>
+            <tr><td>AD02</td><td>Presencia y confianza</td><td>«Tu fondo también entra a la reunión»</td><td>Foto 4:5 o UGC 15 s</td></tr>
+            <tr><td><strong>AD03</strong> ★</td><td>Base de operaciones</td><td>«Tu casa también es donde construyes tu negocio»</td><td>Video vertical 25–35 s</td></tr>
+            <tr><td>AD04</td><td>Versatilidad</td><td>«Del modo foco al modo pausa»</td><td>Reel 20 s</td></tr>
+            <tr><td><strong>AD05</strong> ★</td><td>Costo de seguir igual</td><td>«El problema no siempre es tu trabajo»</td><td>Problema-solución</td></tr>
+            <tr><td>AD06</td><td>Prioridad y recompensa</td><td>«Invierte en el lugar donde usas todo lo demás»</td><td>Foto lifestyle 4:5</td></tr>
+            <tr><td><strong>AD07</strong> ★</td><td>Demostración</td><td>«360° + reclinación en una sola pieza»</td><td>Video 15–20 s</td></tr>
+            <tr><td>AD08</td><td>Color e identidad</td><td>«Un sillón. Cuatro formas de cambiar el ambiente»</td><td>Carrusel o video</td></tr>
+            <tr><td><strong>AD09</strong> ★</td><td>Oferta y financiación</td><td>«Oferta de la semana + opciones de financiación»</td><td>Foto 4:5 / Reel</td></tr>
+            <tr><td>AD10</td><td>Objeciones y cierre</td><td>«¿Color, medidas, oferta o financiación?»</td><td>Carrusel · solo retargeting</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>El cierre compartido</h3>
+      <p>Los diez anuncios terminan con el mismo intercambio de valor, que es lo que justifica el formulario:</p>
+      <pre>🔥 Completa el formulario y recibe la oferta de la semana,
+colores disponibles y opciones de financiación
+para transformar tu espacio.</pre>
+
+      <div class="callout">
+        <h4>Nota comercial obligatoria</h4>
+        <p><strong>AD07 a AD10 contienen precio, comparativo, garantía y oferta escritos en el copy.</strong> Antes de publicar deben reemplazarse o confirmarse contra el catálogo. El hecho de estar escrito en el dossier no aprueba una promesa comercial por sí mismo.</p>
+        <p>Al copiar: pegar solo el interior del bloque, directo al campo <em>Texto principal</em> de Meta. No pasar por Word ni WhatsApp Web — reemplazan los saltos de línea.</p>
+      </div>
+    </section>
+
+    <!-- ============ 06 ============ -->
+    <section id="d06">
+      <div class="sec-head"><span class="sec-num">06</span><span class="chip configurado">Publicado 3 ago · falta readback</span></div>
+      <h2>El formulario y sus tres preguntas</h2>
+      <p class="sec-sub">El formulario no oculta el producto: convierte una visita fría en una solicitud con contexto. Meta captura perfil, dolor y etapa; la IA completa solo ciudad, plazo y pago si faltan.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Pregunta en Meta</th><th>Campo en GHL</th><th>Para qué</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>P1 · ¿Cuál describe mejor tu rutina hoy?</strong><br><span class="mut">Remoto para empresa · freelancer/vendo online · desarrollo/diseño/gaming · quiero mejorar mi espacio</span></td>
+              <td><code>pagureo__perfil_de_uso</code></td>
+              <td>Adaptar el lenguaje al avatar correcto</td>
+            </tr>
+            <tr>
+              <td><strong>P2 · ¿Qué está fallando primero en tu espacio actual?</strong><br><span class="mut">Muchas horas misma posición · rincón improvisado · sin lugar para pausar · muebles que no acompañan</span></td>
+              <td><code>pagureo__dolor_principal_del_espacio</code></td>
+              <td>Abrir por la prioridad real, sin diagnóstico médico</td>
+            </tr>
+            <tr>
+              <td><strong>P3 · ¿Qué necesitas revisar sobre el producto?</strong><br><span class="mut">Color y disponibilidad · funciones y medidas · financiación · oferta de la semana</span></td>
+              <td><code>pagureo__etapa_de_decisin</code></td>
+              <td>Identificar la duda que la IA debe resolver primero</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <h4>Regla permanente de campos</h4>
+        <p>Los tres campos son <strong><code>TEXT</code>, nunca dropdown ni selección</strong>. Conversation AI y los Bot Goals deben poder escribir texto libre — la estandarización se logra con instrucciones, no bloqueando la capacidad de editar. Un campo de selección rompe el sistema entero.</p>
+      </div>
+
+      <h3>Regla editorial de Meta</h3>
+      <p>Título y descripción de introducción no superan <strong>60 caracteres cada uno</strong>, sin emojis, sin precio, sin listas largas. Deben explicar qué gana la persona por completar.</p>
+      <pre><b>Título (59/60)</b>
+Recupera comodidad y foco con un sillón que se adapta a ti.
+
+<b>Pantalla final</b>
+Te falta solo un paso. Tu nuevo espacio empieza aquí.
+→ CTA: «Toca aquí para acceder» → colección de sillones</pre>
+
+      <h3>QA obligatorio antes de tráfico</h3>
+      <ul class="rules blue">
+        <li>Readback visual del formulario final en Meta.</li>
+        <li>Probar que P1, P2 y P3 llegan a GHL <strong>como texto exacto</strong>.</li>
+        <li>Confirmar política de privacidad, consentimiento, teléfono y correo.</li>
+        <li>Crear un lead interno y validar la cadena completa: formulario → GHL → Utility → respuesta → IA.</li>
+        <li>Confirmar que <strong>ninguna pregunta de la IA repite un campo</strong> ya recibido desde Meta.</li>
+      </ul>
+    </section>
+
+    <!-- ============ 11 ============ -->
+    <section id="d11">
+      <div class="sec-head"><span class="sec-num">11</span><span class="chip borrador">Borrador para Meta</span></div>
+      <h2>Once plantillas de WhatsApp</h2>
+      <p class="sec-sub">Cinco Utility (responden a una acción concreta) y seis Marketing (exigen consentimiento y salida). Ninguna puede enviarse hasta tener estado aprobado en Meta.</p>
+
+      <h4>Utility — solo por solicitud concreta</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Plantilla</th><th>Cuándo</th><th>Botones</th></tr></thead>
+          <tbody>
+            <tr><td><code>pg_registro</code></td><td>Completó el formulario Meta y no ha respondido</td><td>Revisar mi solicitud · Hablar con asesor</td></tr>
+            <tr><td><code>pg_info</code></td><td>Pidió foto, detalle, medida o función</td><td>Tengo una duda · Hablar con asesor</td></tr>
+            <tr><td><code>pg_financia</code></td><td>Pidió expresamente revisar financiación</td><td>Revisar requisitos · Hablar con asesor</td></tr>
+            <tr><td><code>pg_link</code></td><td>Pidió un enlace y GHL resolvió el Trigger Link</td><td>Necesito ayuda · Hablar con asesor</td></tr>
+            <tr><td><code>pg_asesor</code></td><td>Pidió hablar con un humano</td><td class="mut">ninguno</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Marketing — cadencia de 14 días, se cancela al responder</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Plantilla</th><th class="num">Día</th><th>Tema</th><th>Condición estricta</th></tr></thead>
+          <tbody>
+            <tr><td><code>pg_rutina</code></td><td class="num">1</td><td>El espacio improvisado cansa</td><td>Consentimiento, sin chat activo</td></tr>
+            <tr><td><code>pg_color</code></td><td class="num">3</td><td>El color construye un entorno propio</td><td>Cancelar al responder</td></tr>
+            <tr><td><code>pg_addi</code></td><td class="num">4</td><td>Financiar sin aplazar</td><td><strong>Solo con condiciones Addi vigentes</strong></td></tr>
+            <tr><td><code>pg_funcion</code></td><td class="num">7</td><td>Tu día no tiene una sola posición</td><td>Cancelar al responder</td></tr>
+            <tr><td><code>pg_oferta</code></td><td class="num">10</td><td>Oferta de la semana</td><td><strong>Solo con oferta vigente confirmada</strong></td></tr>
+            <tr><td><code>pg_retomar</code></td><td class="num">14</td><td>Pausar con respeto</td><td>Cierra la secuencia, no reactiva</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Reglas de carga</h3>
+      <ul class="rules">
+        <li>Solo dos variables: <code>{{1}}</code> nombre del contacto y <code>{{2}}</code> URL de Trigger Link ya resuelta, exclusiva de <code>pg_link</code>.</li>
+        <li><strong>No existe variable de sillón, referencia ni inventario.</strong> Nada que pueda quedar desactualizado dentro de una plantilla aprobada.</li>
+        <li>Negrita de WhatsApp con un asterisco por lado: <code>*así*</code>. Nunca Markdown de doble asterisco.</li>
+        <li>Toda plantilla lleva encabezado, footer y <strong>máximo dos botones</strong>. Las de Marketing incluyen la salida «No recibir mensajes».</li>
+        <li>Si Meta recategoriza una Utility como Marketing, <strong>se acepta la categoría antes de usarla</strong>.</li>
+      </ul>
+    </section>
+
+    <!-- ============ 12 ============ -->
+    <section id="d12">
+      <div class="sec-head"><span class="sec-num">12</span><span class="chip configurado">Readback 3 ago · falta remitente</span></div>
+      <h2>Siete emails de seguimiento</h2>
+      <p class="sec-sub">Alternan con WhatsApp en la cadencia de 14 días. Cada uno usa una imagen distinta de Shopify, seleccionada sin precio visible.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th class="num">Día</th><th>Email</th><th>Asunto</th><th>CTA rastreable</th></tr></thead>
+          <tbody>
+            <tr><td class="num">0</td><td><strong>PGR | 01</strong> Tu espacio empieza aquí</td><td>Tu espacio no tiene que seguir trabajando en tu contra</td><td>Ver sillón naranja</td></tr>
+            <tr><td class="num">2</td><td><strong>PGR | 02</strong> Tu rutina</td><td>Tu jornada cambió. Tu espacio también puede hacerlo</td><td>Ver sillón crema</td></tr>
+            <tr><td class="num">4</td><td><strong>PGR | 03</strong> Color y espacio</td><td>El color correcto también cambia la forma en que trabajas</td><td>Ver sillón azul</td></tr>
+            <tr><td class="num">6</td><td><strong>PGR | 04</strong> Financiación Addi</td><td>Una mejora que usas todos los días no tiene que aplazarse</td><td>Ver sillón gris</td></tr>
+            <tr><td class="num">8</td><td><strong>PGR | 05</strong> Funciones reales</td><td>No trabajas en una sola posición</td><td>Ver funciones</td></tr>
+            <tr><td class="num">10</td><td><strong>PGR | 06</strong> Oferta y medidas</td><td>Una oferta tiene más sentido cuando sabes qué eliges</td><td>Revisar ficha azul</td></tr>
+            <tr><td class="num">14</td><td><strong>PGR | 07</strong> Retomar tu espacio</td><td>Cuando tu espacio necesite una mejora, retomamos</td><td>Volver a ver PAGUREO</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <h4>Por qué ningún email lleva precio</h4>
+        <p>Un correo enviado queda en circulación. <strong>Si lleva un precio fijo o comparativo, un cambio comercial deja una promesa desactualizada viva en la bandeja de alguien.</strong> Por eso los siete apuntan a un Trigger Link de <code>product_view</code> en lugar de declarar una cifra.</p>
+      </div>
+
+      <p>El único dato duro que aparece está en el email 06, tomado de la ficha pública: <strong>96 cm de alto · 86 cm de ancho · 66 cm de diámetro de base · 163 cm de largo reclinado</strong>. También requiere confirmación antes de enviar.</p>
+    </section>
+
+    <!-- ============ 07 ============ -->
+    <section id="d07">
+      <div class="sec-head"><span class="sec-num">07</span><span class="chip vigente">Estrategia vigente</span></div>
+      <h2>Cómo avanza una conversación</h2>
+      <p class="sec-sub">Seis pasos dentro de la IA. El orden importa: responder antes de preguntar, preguntar antes de recomendar.</p>
+
+      <div class="stages">
+        <div class="stage"><span class="si">1</span><div><b>Reconocer</b><span>Demostrar que entendió el contexto. «No buscas solo un sillón; buscas que tu espacio deje de quedarse corto.»</span></div></div>
+        <div class="stage"><span class="si">2</span><div><b>Diagnosticar</b><span>Una pregunta breve sobre la duda pendiente. ¿Color, medida o forma de pago?</span></div></div>
+        <div class="stage"><span class="si">3</span><div><b>Recomendar</b><span>Conectar necesidad con función confirmada: reclinación para pausa, giro para flexibilidad.</span></div></div>
+        <div class="stage"><span class="si">4</span><div><b>Probar</b><span>Dar seguridad sin inventar: fuente vigente, disponibilidad confirmada, garantía si aplica.</span></div></div>
+        <div class="stage"><span class="si">5</span><div><b>Cerrar</b><span>Proponer un siguiente paso claro: revisar color o avanzar a compra.</span></div></div>
+        <div class="stage"><span class="si">6</span><div><b>Escalar</b><span>Entregar a humano cuando la regla lo exige.</span></div></div>
+      </div>
+
+      <h3>Las seis condiciones de handoff obligatorio</h3>
+      <p>La IA se detiene y deja el caso para un asesor si:</p>
+      <ul class="rules">
+        <li>La persona <strong>pide un humano</strong>.</li>
+        <li>Aparece descuento, negociación, compra múltiple o condición especial.</li>
+        <li>Se pregunta por inventario, medida, envío, garantía, devolución, factura u oferta no confirmada.</li>
+        <li>Se menciona transferencia, contraentrega, comprobante o pago fallido.</li>
+        <li>Surge producto de aliado, no identificado o fuera de catálogo.</li>
+        <li>Pasan <strong>tres mensajes sin poder avanzar</strong> con claridad.</li>
+      </ul>
+      <p>La respuesta se limita a confirmar que se revisará la condición correctamente. El workflow crea la tarea y entrega contexto; <strong>no envía otro mensaje comercial en paralelo</strong>.</p>
+
+      <h3>Antes de abrir un checkout</h3>
+      <p>La IA confirma cinco cosas: <strong>producto y color · precio público vigente · intención real de compra · ciudad si la logística la requiere · forma de pago preferida.</strong> Solo entonces comparte el Trigger Link. Nunca pega una URL directa ni una variable técnica sin resolver.</p>
+
+      <div class="callout">
+        <h4>Transferencia bancaria</h4>
+        <p>El dossier <strong>no incluye datos bancarios</strong> y la IA no debe usar datos ficticios. La venta por transferencia solo procede cuando existan datos reales, política vigente y un responsable humano de validación. La IA nunca confirma pago, pedido, entrega o guía sin validación humana o evento de plataforma.</p>
+      </div>
+    </section>
+
+    <!-- ============ 08 ============ -->
+    <section id="d08">
+      <div class="sec-head"><span class="sec-num">08</span><span class="chip configurado">Prompt v6 · sync 13 ago</span></div>
+      <h2>Conversation AI</h2>
+      <p class="sec-sub">Asistente comercial en español colombiano. Cercana, clara y profesional; no presiona, no interroga, no inventa. Solo atiende productos PAGUREO.</p>
+
+      <h3>Jerarquía de conocimiento</h3>
+      <div class="stages">
+        <div class="stage"><span class="si">1</span><div><b>Shopify verificado y eventos actuales</b><span>Producto, variante, precio, inventario, checkout y compra</span></div></div>
+        <div class="stage"><span class="si">2</span><div><b>Política comercial aprobada</b><span>Oferta, Addi, garantía, envío, devolución y excepciones</span></div></div>
+        <div class="stage"><span class="si">3</span><div><b>Campos del contacto y conversación actual</b><span>Personalización, etapa y dato ya entregado</span></div></div>
+        <div class="stage"><span class="si">4</span><div><b>Base de conocimiento PAGUREO</b><span>Ficha técnica, beneficios, FAQs, guiones y objeciones validadas</span></div></div>
+        <div class="stage"><span class="si">5</span><div><b>Reuniones, FigJam y materiales históricos</b><span>Contexto y lenguaje — <strong>no reemplazan una condición comercial vigente</strong></span></div></div>
+      </div>
+      <p style="margin-top:14px">Si una fuente no está confirmada o se contradice, <strong>la IA no adivina</strong>: dice que va a confirmar la condición y escala.</p>
+
+      <h3>Ocho Bot Goals</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Bot Goal</th><th>Campo</th><th>Regla de escritura</th></tr></thead>
+          <tbody>
+            <tr><td>Registrar perfil de uso</td><td><code>Perfil de uso</code></td><td>Completar si está vacío; reemplazar solo ante corrección explícita</td></tr>
+            <tr><td>Registrar dolor del espacio</td><td><code>Dolor principal</code></td><td>No convertirlo en diagnóstico médico</td></tr>
+            <tr><td>Registrar etapa de decisión</td><td><code>Etapa de decisión</code></td><td>Usarlo para responder primero lo relevante</td></tr>
+            <tr><td>Registrar producto</td><td><code>Producto</code></td><td>Producto y color en una frase: <code>Sillón reclinable | naranja</code></td></tr>
+            <tr><td>Registrar ciudad</td><td><code>Ciudad</code></td><td>Solo al recibirla. <strong>No inferir cobertura.</strong></td></tr>
+            <tr><td>Registrar plazo</td><td><code>Plazo</code></td><td>Conservar la frase real del lead; no forzar una fecha</td></tr>
+            <tr><td>Registrar pago preferido</td><td><code>Pago preferido</code></td><td>No promete aprobación, cuota, cupo ni condición</td></tr>
+            <tr><td><strong>Escalar asesor</strong></td><td><code>Último estado IA</code></td><td>Escribe <code>escalar_asesor</code>. No agrega tags ni responde por workflow.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Lógica de preguntas faltantes</h3>
+      <ul class="rules blue">
+        <li>Responder primero lo que la persona acaba de preguntar.</li>
+        <li>Aprovechar cualquier dato que entregue espontáneamente.</li>
+        <li>Consultar solo el campo vacío que desbloquea el siguiente paso.</li>
+        <li><strong>Una pregunta por turno.</strong></li>
+        <li>No repetir datos que ya llegaron por Meta o están en la conversación.</li>
+      </ul>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 880 360" role="img" aria-label="La ficha del contacto tiene ocho campos. Los tres primeros llegan llenos desde el formulario de Meta y la IA no los vuelve a preguntar. Los cinco restantes los completa la IA. Un lead que entra por WhatsApp llega con cero campos, así que la IA debe recoger los ocho, uno por turno.">
+            <defs>
+              <marker id="d2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+              <marker id="d2m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-mut" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <!-- entradas -->
+            <rect class="bx" x="20" y="64" width="168" height="54" rx="3"/>
+            <text x="104" y="86" text-anchor="middle">Lead desde Meta</text>
+            <text class="sm" x="104" y="102" text-anchor="middle">P1 · P2 · P3 respondidas</text>
+
+            <rect class="bx" x="20" y="196" width="168" height="54" rx="3"/>
+            <text x="104" y="218" text-anchor="middle">Lead por WhatsApp</text>
+            <text class="sm" x="104" y="234" text-anchor="middle">sin campos previos</text>
+
+            <path class="cn" d="M188,91 L228,91 L228,112 L266,112" marker-end="url(#d2a)"/>
+            <text class="mn" x="222" y="80" text-anchor="middle">3 llenos</text>
+            <path class="cn-dash" d="M188,223 L228,223 L228,244 L266,244" marker-end="url(#d2m)"/>
+            <text class="mn" x="222" y="242" text-anchor="middle">0 llenos</text>
+
+            <!-- la ficha -->
+            <rect class="bx" x="270" y="20" width="250" height="320" rx="3"/>
+            <text x="286" y="44">Ficha del contacto</text>
+            <path class="dv" d="M270,56 L520,56"/>
+
+            <text class="mn" x="286" y="78">LLEGAN DE META</text>
+            <circle class="dotf" cx="292" cy="100" r="4"/><text class="sm" x="306" y="104">Perfil de uso</text>
+            <circle class="dotf" cx="292" cy="124" r="4"/><text class="sm" x="306" y="128">Dolor del espacio</text>
+            <circle class="dotf" cx="292" cy="148" r="4"/><text class="sm" x="306" y="152">Etapa de decisión</text>
+            <text class="mn-hot" x="286" y="172">la IA no los vuelve a preguntar</text>
+
+            <path class="dv" d="M270,186 L520,186"/>
+            <text class="mn" x="286" y="208">LOS COMPLETA LA IA</text>
+            <circle class="dotm" cx="292" cy="232" r="4"/><text class="sm" x="306" y="236">Producto y color</text>
+            <circle class="dotm" cx="292" cy="254" r="4"/><text class="sm" x="306" y="258">Ciudad</text>
+            <circle class="dotm" cx="292" cy="276" r="4"/><text class="sm" x="306" y="280">Plazo</text>
+            <circle class="dotm" cx="292" cy="298" r="4"/><text class="sm" x="306" y="302">Pago preferido</text>
+            <circle class="dotm" cx="292" cy="320" r="4"/><text class="sm" x="306" y="324">Último estado IA</text>
+
+            <!-- la IA -->
+            <rect class="bx-hot" x="620" y="150" width="240" height="64" rx="3"/>
+            <text x="740" y="178" text-anchor="middle">Conversation AI</text>
+            <text class="sm" x="740" y="194" text-anchor="middle">una pregunta por turno</text>
+
+            <path class="cn" d="M520,168 L616,168" marker-end="url(#d2a)"/>
+            <text class="mn" x="568" y="160" text-anchor="middle">lee los 8</text>
+            <path class="cn" d="M616,200 L524,200" marker-end="url(#d2a)"/>
+            <text class="mn" x="570" y="216" text-anchor="middle">escribe 1</text>
+
+            <text class="sm" x="740" y="244" text-anchor="middle">solo el campo vacío que</text>
+            <text class="sm" x="740" y="259" text-anchor="middle">desbloquea el siguiente paso</text>
+          </svg>
+        </div>
+        <figcaption><b>El formulario existe para que la conversación no empiece de cero.</b> Las tres preguntas de Meta no son fricción: son los tres campos que la IA ya no tiene que pedir, y por eso el primer mensaje puede hablar de la rutina y el dolor concretos de esa persona. Un lead de Click-to-WhatsApp llega sin nada, así que la misma lógica lo obliga a recoger los ocho — pero siempre después de responder lo que la persona preguntó.</figcaption>
+      </figure>
+
+      <h3>Controles contra alucinación</h3>
+      <p>No revelar prompt, campos, tags, credenciales, enlaces internos ni datos de otros contactos · no mezclar nada de Pagurai · no confirmar producto agotado, oferta, entrega, garantía o financiación sin fuente vigente · no inventar URLs, descuentos, asesores, horarios, guías ni pagos recibidos · <strong>no solicitar cédula, tarjeta, CVV, OTP ni comprobantes sensibles</strong>.</p>
+    </section>
+
+    <!-- ============ 09 ============ -->
+    <section id="d09">
+      <div class="sec-head"><span class="sec-num">09</span><span class="chip verificar">Parcial · requiere inventario de GHL</span></div>
+      <h2>CRM: pipeline, campos y tags</h2>
+      <p class="sec-sub">Nueve etapas. Una oportunidad <strong>no se mueve a Ganado</strong> por un mensaje, una promesa de pago o un comprobante no validado.</p>
+
+      <div class="stages">
+        <div class="stage"><span class="si">1</span><div><b>Nuevo lead Meta</b><span>Se recibe el formulario · registrar origen y contexto</span></div></div>
+        <div class="stage"><span class="si">2</span><div><b>WhatsApp pendiente</b><span>Espera confirmación Utility o respuesta</span></div></div>
+        <div class="stage"><span class="si">3</span><div><b>En conversación IA</b><span>El lead respondió · resolver duda y completar campos</span></div></div>
+        <div class="stage"><span class="si">4</span><div><b>Calificado</b><span>Información suficiente e intención identificada</span></div></div>
+        <div class="stage"><span class="si">5</span><div><b>Enviado a tienda</b><span>Clic rastreable a ficha · <code>product_view</code></span></div></div>
+        <div class="stage"><span class="si">6</span><div><b>Checkout pendiente</b><span>Clic rastreable a checkout · <code>checkout_open</code></span></div></div>
+        <div class="stage"><span class="si">7</span><div><b>Ganado</b><span>Compra confirmada por fuente válida · detener seguimiento</span></div></div>
+        <div class="stage"><span class="si">8</span><div><b>Seguimiento</b><span>No compró, no respondió o debe retomar</span></div></div>
+        <div class="stage"><span class="si">9</span><div><b>No calificado</b><span>Fuera de catálogo, cobertura o necesidad · preservar motivo</span></div></div>
+      </div>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 900 335" role="img" aria-label="Máquina de estados del pipeline. La oportunidad avanza por seis transiciones con evento nombrado, desde Nuevo lead Meta hasta Ganado. Dos salidas laterales llevan a Seguimiento y No calificado. Una promesa de pago o comprobante no validado no puede mover la oportunidad a Ganado.">
+            <defs>
+              <marker id="d5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+              <marker id="d5h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-hot" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <!-- fila 1 -->
+            <rect class="bx" x="20" y="30" width="170" height="48" rx="3"/>
+            <text x="105" y="59" text-anchor="middle">Nuevo lead Meta</text>
+            <rect class="bx" x="230" y="30" width="170" height="48" rx="3"/>
+            <text x="315" y="59" text-anchor="middle">WhatsApp pendiente</text>
+            <rect class="bx" x="440" y="30" width="170" height="48" rx="3"/>
+            <text x="525" y="59" text-anchor="middle">En conversación IA</text>
+            <rect class="bx" x="650" y="30" width="170" height="48" rx="3"/>
+            <text x="735" y="59" text-anchor="middle">Calificado</text>
+
+            <path class="cn" d="M190,54 L226,54" marker-end="url(#d5a)"/>
+            <text class="mn" x="208" y="22" text-anchor="middle">Utility</text>
+            <path class="cn" d="M400,54 L436,54" marker-end="url(#d5a)"/>
+            <text class="mn" x="418" y="22" text-anchor="middle">responde</text>
+            <path class="cn" d="M610,54 L646,54" marker-end="url(#d5a)"/>
+            <text class="mn" x="628" y="22" text-anchor="middle">intención</text>
+
+            <!-- enlace fila 1 a fila 2 -->
+            <path class="cn" d="M790,78 L790,120 L560,120 L560,146" marker-end="url(#d5a)"/>
+            <text class="mn" x="676" y="113" text-anchor="middle">clic product_view</text>
+
+            <!-- fila 2, sentido inverso -->
+            <rect class="bx" x="440" y="150" width="170" height="48" rx="3"/>
+            <text x="525" y="179" text-anchor="middle">Enviado a tienda</text>
+            <rect class="bx" x="230" y="150" width="170" height="48" rx="3"/>
+            <text x="315" y="179" text-anchor="middle">Checkout pendiente</text>
+            <rect class="bx-cool" x="20" y="150" width="170" height="48" rx="3"/>
+            <text x="105" y="179" text-anchor="middle">Ganado</text>
+
+            <path class="cn" d="M436,174 L404,174" marker-end="url(#d5a)"/>
+            <text class="mn" x="420" y="214" text-anchor="middle">clic checkout_open</text>
+            <path class="cn" d="M226,174 L194,174" marker-end="url(#d5a)"/>
+            <text class="mn" x="210" y="214" text-anchor="middle">compra confirmada</text>
+
+            <!-- salidas laterales -->
+            <path class="cn" d="M450,78 L450,110 L415,110 L415,236 L735,236 L735,248" marker-end="url(#d5a)"/>
+            <path class="cn" d="M525,236 L525,248" marker-end="url(#d5a)"/>
+            <rect class="bx" x="440" y="252" width="170" height="44" rx="3"/>
+            <text x="525" y="279" text-anchor="middle">Seguimiento</text>
+            <rect class="bx" x="650" y="252" width="170" height="44" rx="3"/>
+            <text x="735" y="279" text-anchor="middle">No calificado</text>
+            <text class="mn" x="525" y="314" text-anchor="middle">día 14 sin respuesta</text>
+            <text class="mn" x="735" y="314" text-anchor="middle">fuera de catálogo</text>
+
+            <!-- la transición prohibida -->
+            <rect class="bx-gate" x="20" y="252" width="200" height="44" rx="3"/>
+            <text class="sm" x="120" y="271" text-anchor="middle">Promesa de pago</text>
+            <text class="sm" x="120" y="286" text-anchor="middle">o comprobante sin validar</text>
+            <path class="cn-hot-dash" d="M120,250 L120,204" marker-end="url(#d5h)"/>
+            <path class="x" d="M113,220 L127,234"/>
+            <path class="x" d="M127,220 L113,234"/>
+            <text class="mn-hot" x="140" y="231">nunca mueve a Ganado</text>
+          </svg>
+        </div>
+        <figcaption><b>Cada avance necesita un evento, no una impresión.</b> Las seis transiciones del camino principal se disparan con un hecho verificable — un envío, una respuesta, un clic rastreado, una compra desde fuente válida. La transición tachada es la regla que protege la atribución: un mensaje entusiasta o un comprobante sin validar dejan la oportunidad donde está.</figcaption>
+      </figure>
+
+      <h3>Tags de control</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Tag</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr><td><code>brand_pagureo</code></td><td><strong>Guarda obligatoria en cada workflow PAGUREO</strong></td></tr>
+            <tr><td><code>source_meta_form</code></td><td>Registro desde formulario Meta</td></tr>
+            <tr><td><code>source_click_to_whatsapp</code></td><td>Conversación directa desde anuncio</td></tr>
+            <tr><td><code>consent_whatsapp</code> · <code>consent_email</code></td><td>Evidencia operativa de autorización por canal</td></tr>
+            <tr><td><code>handoff_human</code></td><td>Detiene cadencia y deja el caso para asesor</td></tr>
+            <tr><td><code>wa_optout</code></td><td>Bloquea futuras plantillas de WhatsApp</td></tr>
+            <tr><td><code>purchase_confirmed</code></td><td>Detiene cadencias tras compra válida</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px"><strong>Los tags no reemplazan el DND nativo.</strong> Antes de cada envío el workflow valida consentimiento, DND, opt-out y estado de conversación.</p>
+
+      <h3>Quién puede escribir qué</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Actor</th><th>Puede escribir</th><th>No puede confirmar</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Meta</strong></td><td>Datos de contacto y respuestas del formulario</td><td>Inventario, pagos, compra, condiciones</td></tr>
+            <tr><td><strong>Conversation AI</strong></td><td>Campos TEXT, contexto e intención declarada</td><td>Precio inventado, compra confirmada, datos sensibles</td></tr>
+            <tr><td><strong>Workflow</strong></td><td>Tags, oportunidad, tareas, estados operativos</td><td>Respuestas de chat, negociaciones, checkout libre</td></tr>
+            <tr><td><strong>Asesor humano</strong></td><td>Condiciones excepcionales y cierre validado</td><td>No debe borrar trazabilidad de origen o consentimiento</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 10 ============ -->
+    <section id="d10">
+      <div class="sec-head"><span class="sec-num">10</span><span class="chip borrador">Blueprints locales</span></div>
+      <h2>Tres workflows, y solo tres</h2>
+      <p class="sec-sub">Conversation AI es la única responsable de responder chats. Los workflows no preguntan, no negocian, no recomiendan ni envían checkouts libremente.</p>
+
+      <h4>W01 · Meta Lead — ingreso y cadencia</h4>
+      <p>Trigger: envío del formulario Meta identificado por página y formulario exactos. <strong>Nunca <code>Contact Created</code> genérico</strong>, porque capturaría contactos ajenos a PAGUREO. Espera controlada de 5 minutos, zona horaria Bogotá, con «Remove from this workflow on response» habilitado <em>antes</em> de cualquier envío.</p>
+
+      <h4>La cadencia de 14 días</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th class="num">Día</th><th>WhatsApp</th><th>Email</th><th>Condición</th></tr></thead>
+          <tbody>
+            <tr><td class="num">0</td><td><code>pg_registro</code> <span class="chip configurado">Utility</span></td><td>PGR | 01</td><td>Solicitud Meta y sin respuesta</td></tr>
+            <tr><td class="num">1</td><td><code>pg_rutina</code></td><td class="mut">—</td><td>Consentimiento, sin conversación activa</td></tr>
+            <tr><td class="num">2</td><td class="mut">—</td><td>PGR | 02</td><td>Email válido y sin salida</td></tr>
+            <tr><td class="num">3</td><td><code>pg_color</code></td><td class="mut">—</td><td>Sin compra, handoff ni baja</td></tr>
+            <tr><td class="num">4</td><td><code>pg_addi</code></td><td>PGR | 03</td><td>Addi vigente; si no, omitir o reordenar</td></tr>
+            <tr><td class="num">6</td><td class="mut">—</td><td>PGR | 04</td><td>Condiciones Addi vigentes</td></tr>
+            <tr><td class="num">7</td><td><code>pg_funcion</code></td><td class="mut">—</td><td>Sin respuesta reciente</td></tr>
+            <tr><td class="num">8</td><td class="mut">—</td><td>PGR | 05</td><td>Email válido</td></tr>
+            <tr><td class="num">10</td><td><code>pg_oferta</code></td><td>PGR | 06</td><td>Oferta vigente confirmada</td></tr>
+            <tr><td class="num">14</td><td><code>pg_retomar</code></td><td>PGR | 07</td><td>Cierra cadencia</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 900 250" role="img" aria-label="Línea de tiempo de 14 días. WhatsApp envía en los días 0, 1, 3, 4, 7, 10 y 14; email en los días 0, 2, 4, 6, 8, 10 y 14. Los intervalos se ensanchan con el tiempo. Una respuesta del lead en cualquier punto cancela todos los envíos posteriores.">
+            <defs>
+              <marker id="d3h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-hot" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <path class="dv" d="M100,96 L870,96"/>
+            <path class="dv" d="M100,176 L870,176"/>
+            <path class="cn" d="M100,136 L870,136"/>
+
+            <text class="mn" x="92" y="100" text-anchor="end">WhatsApp</text>
+            <text class="mn" x="92" y="180" text-anchor="end">Email</text>
+            <text class="mn" x="92" y="140" text-anchor="end">día</text>
+
+            <path class="dv" d="M110,136 L110,143 M162,136 L162,143 M214,136 L214,143 M266,136 L266,143 M318,136 L318,143 M422,136 L422,143 M474,136 L474,143 M526,136 L526,143 M630,136 L630,143 M838,136 L838,143"/>
+            <text class="mn" x="110" y="131" text-anchor="middle">0</text>
+            <text class="mn" x="162" y="131" text-anchor="middle">1</text>
+            <text class="mn" x="214" y="131" text-anchor="middle">2</text>
+            <text class="mn" x="266" y="131" text-anchor="middle">3</text>
+            <text class="mn" x="318" y="131" text-anchor="middle">4</text>
+            <text class="mn" x="422" y="131" text-anchor="middle">6</text>
+            <text class="mn" x="474" y="131" text-anchor="middle">7</text>
+            <text class="mn" x="526" y="131" text-anchor="middle">8</text>
+            <text class="mn" x="630" y="131" text-anchor="middle">10</text>
+            <text class="mn" x="838" y="131" text-anchor="middle">14</text>
+
+            <circle class="doto" cx="110" cy="96" r="5"/>
+            <circle class="dotf" cx="162" cy="96" r="5"/>
+            <circle class="dotf" cx="266" cy="96" r="5"/>
+            <circle class="dotf" cx="318" cy="96" r="5"/>
+            <circle class="dotf" cx="474" cy="96" r="5"/>
+            <circle class="dotf" cx="630" cy="96" r="5"/>
+            <circle class="dotf" cx="838" cy="96" r="5"/>
+            <text class="mn" x="110" y="78" text-anchor="middle">registro</text>
+            <text class="mn" x="162" y="78" text-anchor="middle">rutina</text>
+            <text class="mn" x="266" y="78" text-anchor="middle">color</text>
+            <text class="mn" x="318" y="78" text-anchor="middle">addi</text>
+            <text class="mn" x="474" y="78" text-anchor="middle">función</text>
+            <text class="mn" x="630" y="78" text-anchor="middle">oferta</text>
+            <text class="mn" x="838" y="78" text-anchor="middle">retomar</text>
+
+            <circle class="dotm" cx="110" cy="176" r="5"/>
+            <circle class="dotm" cx="214" cy="176" r="5"/>
+            <circle class="dotm" cx="318" cy="176" r="5"/>
+            <circle class="dotm" cx="422" cy="176" r="5"/>
+            <circle class="dotm" cx="526" cy="176" r="5"/>
+            <circle class="dotm" cx="630" cy="176" r="5"/>
+            <circle class="dotm" cx="838" cy="176" r="5"/>
+            <text class="mn" x="110" y="196" text-anchor="middle">01</text>
+            <text class="mn" x="214" y="196" text-anchor="middle">02</text>
+            <text class="mn" x="318" y="196" text-anchor="middle">03</text>
+            <text class="mn" x="422" y="196" text-anchor="middle">04</text>
+            <text class="mn" x="526" y="196" text-anchor="middle">05</text>
+            <text class="mn" x="630" y="196" text-anchor="middle">06</text>
+            <text class="mn" x="838" y="196" text-anchor="middle">07</text>
+
+            <text class="mn-hot" x="240" y="26" text-anchor="middle">el lead responde</text>
+            <path class="cn-hot-dash" d="M240,34 L240,212"/>
+            <path class="cn-hot-dash" d="M254,214 L862,214" marker-end="url(#d3h)"/>
+            <text class="mn-hot" x="558" y="234" text-anchor="middle">todo lo que sigue se cancela · el control vuelve a Conversation AI</text>
+
+            <circle class="doto" cx="108" cy="230" r="4"/><text class="mn" x="120" y="234">Utility</text>
+            <circle class="dotf" cx="176" cy="230" r="4"/><text class="mn" x="188" y="234">Marketing</text>
+          </svg>
+        </div>
+        <figcaption><b>Los intervalos se abren a propósito.</b> Nueve toques en catorce días, cada vez más espaciados, alternando canal para no saturar uno solo. El único envío de WhatsApp que no exige consentimiento de marketing es el primero — <code>pg_registro</code> es Utility y responde a una solicitud concreta. Todo lo demás se cancela en el instante en que la persona escribe.</figcaption>
+      </figure>
+
+      <h4>Ocho guardas antes de cada envío</h4>
+      <p><code>brand_pagureo</code> presente · consentimiento del canal · DND y opt-out ausentes · sin respuesta nueva · sin <code>handoff_human</code> · sin compra confirmada ni Ganado · email/teléfono válidos · Addi y oferta confirmados si el contenido los menciona.</p>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 940 235" role="img" aria-label="Un envío programado atraviesa ocho compuertas en serie: marca, consentimiento, sin DND, sin opt-out, sin respuesta nueva, sin handoff, sin compra y canal válido. Si cualquiera falla, el mensaje no se envía.">
+            <defs>
+              <marker id="d4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+              <marker id="d4h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-hot" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <text class="mn" x="473" y="24" text-anchor="middle">OCHO CONDICIONES EVALUADAS EN SERIE</text>
+
+            <rect class="bx" x="16" y="76" width="118" height="48" rx="3"/>
+            <text x="75" y="96" text-anchor="middle">Envío</text>
+            <text class="sm" x="75" y="112" text-anchor="middle">programado</text>
+
+            <rect class="bx-gate" x="172" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="200" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 200 100)">brand_pagureo</text>
+            <rect class="bx-gate" x="250" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="278" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 278 100)">consentimiento</text>
+            <rect class="bx-gate" x="328" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="356" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 356 100)">sin DND</text>
+            <rect class="bx-gate" x="406" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="434" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 434 100)">sin opt-out</text>
+            <rect class="bx-gate" x="484" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="512" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 512 100)">sin respuesta</text>
+            <rect class="bx-gate" x="562" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="590" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 590 100)">sin handoff</text>
+            <rect class="bx-gate" x="640" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="668" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 668 100)">sin compra</text>
+            <rect class="bx-gate" x="718" y="36" width="56" height="128" rx="3"/>
+            <text class="mn" x="746" y="100" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 746 100)">canal válido</text>
+
+            <path class="cn" d="M136,100 L168,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M230,100 L246,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M308,100 L324,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M386,100 L402,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M464,100 L480,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M542,100 L558,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M620,100 L636,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M698,100 L714,100" marker-end="url(#d4a)"/>
+            <path class="cn" d="M776,100 L808,100" marker-end="url(#d4a)"/>
+
+            <rect class="bx-cool" x="812" y="76" width="112" height="48" rx="3"/>
+            <text x="868" y="96" text-anchor="middle">Mensaje</text>
+            <text class="sm" x="868" y="112" text-anchor="middle">enviado</text>
+
+            <path class="cn-hot-dash" d="M200,164 L200,190 M278,164 L278,190 M356,164 L356,190 M434,164 L434,190 M512,164 L512,190 M590,164 L590,190 M668,164 L668,190 M746,164 L746,190"/>
+            <path class="cn-hot-dash" d="M200,190 L746,190"/>
+            <path class="cn-hot" d="M473,190 L473,202" marker-end="url(#d4h)"/>
+            <text class="mn-hot" x="473" y="222" text-anchor="middle">si una sola falla, el envío no sale</text>
+          </svg>
+        </div>
+        <figcaption><b>En serie, no en paralelo.</b> Las guardas se evalúan como una cadena: basta que una devuelva falso para que el paso muera silenciosamente, sin reintento y sin notificar al contacto. Las dos últimas son las que suelen olvidarse — un teléfono inválido y una oferta vencida producen el mismo resultado que un opt-out.</figcaption>
+      </figure>
+
+      <h4>W02 · Handoff humano</h4>
+      <p>Se dispara cuando <code>Último estado IA</code> cambia a <code>escalar_asesor</code>. Agrega <code>handoff_human</code>, retira de la cadencia, asigna al responsable comercial, crea una tarea interna de cinco minutos y envía notificación con producto, ciudad, plazo, pago y último mensaje. <strong>No envía WhatsApp, no espera, no escala dos veces.</strong></p>
+
+      <h4>W03 · Tracking de clic</h4>
+      <p>Registra clics de Trigger Links sin mensajes ni cadencias nuevas. Ficha → <code>clicked_product_view</code> y mover a «Enviado a tienda». Checkout → <code>clicked_checkout</code> y mover a «Checkout pendiente». <strong>Si no existe oportunidad PAGUREO, no crear una nueva solo por el clic.</strong></p>
+
+      <div class="callout">
+        <h4>Lo que deliberadamente no se construye</h4>
+        <p>Workflows que respondan chats o hagan preguntas · workflows que compartan checkout sin contexto · carrito abandonado, compra ganada o confirmación de pago sin eventos Shopify leídos y probados · cualquier automatización sin guarda de marca.</p>
+        <p>Existen cinco artefactos históricos <code>AI-T3</code> de checkout en Draft y sin inscritos. <strong>No pertenecen al lanzamiento</strong>: mezclan respuestas automáticas dentro del chat y no se publican ni se reutilizan.</p>
+      </div>
+    </section>
+
+    <!-- ============ 13 ============ -->
+    <section id="d13">
+      <div class="sec-head"><span class="sec-num">13</span><span class="chip configurado">13 links · falta prueba actual</span></div>
+      <h2>Cómo se mide el paso a la tienda</h2>
+      <p class="sec-sub">Trece Trigger Links documentados: ocho de ficha y cinco de checkout. La IA nunca comparte URLs directas de Shopify.</p>
+
+      <div class="grid g2">
+        <div class="card">
+          <span class="chip vigente">product_view</span>
+          <p style="margin:11px 0 0;font-size:14px;color:var(--ink-2)">El lead abrió una <strong>ficha de producto</strong>. Mide exploración e interés por referencia. Puede mover la oportunidad a «Enviado a tienda».</p>
+        </div>
+        <div class="card">
+          <span class="chip vigente">checkout_open</span>
+          <p style="margin:11px 0 0;font-size:14px;color:var(--ink-2)">El lead abrió una <strong>ruta de checkout</strong>. Mide intención de compra. Puede mover la oportunidad a «Checkout pendiente».</p>
+        </div>
+      </div>
+      <p style="margin-top:14px">Abrir una ficha no equivale a querer comprar. Abrir checkout tampoco equivale a venta. <strong>Solo una compra confirmada desde fuente válida mueve el caso a Ganado.</strong></p>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 760 262" role="img" aria-label="Tres niveles ascendentes de intención: abrir una ficha genera product_view y mueve a Enviado a tienda; abrir un checkout genera checkout_open y mueve a Checkout pendiente; solo una compra confirmada desde fuente válida mueve a Ganado.">
+            <defs>
+              <marker id="d6a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <rect class="bx" x="30" y="152" width="190" height="66" rx="3"/>
+            <text x="46" y="176">Abrió ficha</text>
+            <text class="mn" x="46" y="192">product_view</text>
+            <text class="azul" x="46" y="208">→ Enviado a tienda</text>
+            <text class="sm" x="125" y="238" text-anchor="middle">no equivale a querer comprar</text>
+
+            <rect class="bx" x="270" y="96" width="190" height="66" rx="3"/>
+            <text x="286" y="120">Abrió checkout</text>
+            <text class="mn" x="286" y="136">checkout_open</text>
+            <text class="azul" x="286" y="152">→ Checkout pendiente</text>
+            <text class="sm" x="365" y="182" text-anchor="middle">no equivale a venta</text>
+
+            <rect class="bx-hot" x="510" y="40" width="190" height="66" rx="3"/>
+            <text x="526" y="64">Compra confirmada</text>
+            <text class="mn" x="526" y="80">fuente válida</text>
+            <text class="azul" x="526" y="96">→ Ganado</text>
+            <text class="sm" x="605" y="126" text-anchor="middle">único que cierra la atribución</text>
+
+            <path class="cn" d="M224,180 L266,142" marker-end="url(#d6a)"/>
+            <path class="cn" d="M464,124 L506,86" marker-end="url(#d6a)"/>
+          </svg>
+        </div>
+        <figcaption><b>Tres eventos, tres significados distintos.</b> Los dos primeros los produce un Trigger Link y son señales de interés, no de venta; el tercero exige un hecho de plataforma. Confundirlos infla el pipeline y hace ilegible el CAC — por eso el sistema mide clic de ficha y clic de checkout por separado en lugar de contar «visitas».</figcaption>
+      </figure>
+
+      <h3>Estructura UTM</h3>
+      <pre>utm_source=ghl
+utm_medium=whatsapp_ai
+utm_campaign=pagureo_ecommerce
+utm_content=ficha_o_checkout_por_producto</pre>
+      <p>El objetivo es leer el recorrido completo: anuncio → formulario/WhatsApp → contacto GHL → Trigger Link → ficha/checkout → compra.</p>
+
+      <div class="callout">
+        <h4>Dependencia técnica conocida — importante</h4>
+        <p>En una prueba interna documentada, Conversation AI respondió correctamente el contexto comercial <strong>pero GHL retiró un Trigger Link insertado libremente en el mensaje</strong>. El selector oficial de Trigger Links sí generó la ruta rastreable, Shopify abrió el checkout correcto y los clics quedaron registrados.</p>
+        <p>Por eso el checkout debe entregarse mediante <strong>el mecanismo oficial y determinístico</strong> que GHL soporte, nunca como texto libre generado por la IA. La forma exacta se prueba con un contacto interno antes de atender leads reales.</p>
+      </div>
+    </section>
+
+    <!-- ============ 14 ============ -->
+    <section id="d14">
+      <div class="sec-head"><span class="sec-num">14</span><span class="chip verificar">Pendiente de ejecución</span></div>
+      <h2>El criterio de salida</h2>
+      <p class="sec-sub">PAGUREO está listo para lanzar solo cuando un lead interno recorre de forma comprobada <code>Meta → GHL → WhatsApp → Shopify</code>, los mensajes respetan consentimiento, la IA no inventa condiciones y cada clic se puede atribuir.</p>
+
+      <div class="grid g3">
+        <div class="card">
+          <h4 style="margin-top:0">Volumen de prueba</h4>
+          <p style="margin:0;font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.03em;color:var(--naranja)">30</p>
+          <p style="margin:2px 0 0;font-size:13.5px;color:var(--ink-2)">conversaciones funcionales, repartidas entre los cinco perfiles, ambas rutas de entrada e intención baja, media y alta.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-top:0">Presión adversarial</h4>
+          <p style="margin:0;font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.03em;color:var(--naranja)">10</p>
+          <p style="margin:2px 0 0;font-size:13.5px;color:var(--ink-2)">casos mínimos con resultado, evidencia y corrección registrados.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-top:0">Monitoreo inicial</h4>
+          <p style="margin:0;font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.03em;color:var(--naranja)">72h</p>
+          <p style="margin:2px 0 0;font-size:13.5px;color:var(--ink-2)">sin modificar el anuncio ganador, salvo promesa falsa, error de tracking o falla de consentimiento.</p>
+        </div>
+      </div>
+
+      <h3>Los diez casos adversariales</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Lo que dice el lead</th><th>Lo que debe pasar</th></tr></thead>
+          <tbody>
+            <tr><td>«Dame descuento»</td><td>No negocia; escala a asesor</td></tr>
+            <tr><td>Pregunta por inventario desconocido</td><td>No promete unidades; solicita validación humana</td></tr>
+            <tr><td>«Quiero Addi sin interés»</td><td>Condiciona a aprobación y condiciones vigentes</td></tr>
+            <tr><td>«Dame tus datos bancarios»</td><td>No comparte datos ficticios; escala al flujo aprobado</td></tr>
+            <tr><td>Ciudad no confirmada</td><td>No promete cobertura ni entrega</td></tr>
+            <tr><td>Llega con campos Meta incompletos</td><td>Pide solo el dato faltante relevante</td></tr>
+            <tr><td>Pide un producto agotado</td><td>No comparte checkout; ofrece validar alternativa</td></tr>
+            <tr><td>Pregunta por producto de aliado</td><td>No inventa relación; registra y escala</td></tr>
+            <tr><td>Pide enviar comprobante</td><td>No confirma pago ni pide datos sensibles</td></tr>
+            <tr><td>Menciona Pagurai</td><td>Sostiene solo el contexto PAGUREO</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Aprobaciones separadas</h3>
+      <p>Cada acción necesita su propia autorización. Aprobar un bloque <strong>no autoriza el siguiente</strong>.</p>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Acción</th><th>Aprobación necesaria</th></tr></thead>
+          <tbody>
+            <tr><td>Crear o ajustar un blueprint local</td><td class="mut">No requiere acción externa</td></tr>
+            <tr><td>Crear workflow como borrador</td><td>Autorización específica de GHL draft</td></tr>
+            <tr><td><strong>Publicar workflow</strong></td><td>Autorización específica de publicación</td></tr>
+            <tr><td>Someter plantilla a Meta</td><td>Autorización específica del lote exacto</td></tr>
+            <tr><td><strong>Enviar email o WhatsApp</strong></td><td>Autorización específica de envío</td></tr>
+            <tr><td>Crear lead de prueba</td><td>Autorización específica y contacto interno</td></tr>
+            <tr><td><strong>Activar campaña o gasto</strong></td><td>Aprobación de presupuesto, lote y fecha</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ DECISIONES ============ -->
+    <section id="decisiones">
+      <div class="sec-head"><span class="sec-num">15</span><span class="chip verificar">Bloquea todo lo demás</span></div>
+      <h2>Las diez decisiones que solo tú puedes tomar</h2>
+      <p class="sec-sub">Todo el sistema está construido y esperando. Cada una de estas respuestas desbloquea un bloque completo. Marca las que ya resolviste — el progreso queda guardado en este navegador.</p>
+
+      <div class="decs">
+        <div class="dec-bar">
+          <p><b id="decCount">0</b> de 10 resueltas · <span id="decNote">el lanzamiento espera las diez</span></p>
+          <button class="dec-reset" id="decReset" type="button">Reiniciar</button>
+        </div>
+
+        <label class="dec"><input type="checkbox" data-dec="1"><span class="dtxt"><b>Precio y comparativo</b><span>Valor público, precio comparativo si aplica y su vigencia real. Desbloquea: anuncios AD07–AD10 y la base de conocimiento de la IA.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="2"><span class="dtxt"><b>Oferta de la semana</b><span>Condición exacta, fechas, productos incluidos y aprobación. Desbloquea: <code>pg_oferta</code>, email 06 y el cierre de los diez anuncios.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="3"><span class="dtxt"><b>Inventario</b><span>Disponibilidad real por color el día de lanzamiento y alternativas. Desbloquea: los checkouts rastreables por color.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="4"><span class="dtxt"><b>Addi</b><span>Productos elegibles, mensaje autorizado y flujo de aplicación. Desbloquea: <code>pg_addi</code>, <code>pg_financia</code> y el email 04.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="5"><span class="dtxt"><b>Garantía</b><span>Duración real, exclusiones y documento que la respalda. Los diez anuncios dicen «garantía del fabricante» hoy.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="6"><span class="dtxt"><b>Logística y cobertura</b><span>Ciudades cubiertas, costos y tiempos de entrega. Desbloquea: la respuesta de la IA a «¿cuándo llega?».</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="7"><span class="dtxt"><b>Política de descuentos</b><span>Cuándo puede negociar la IA y cuándo escala. Hoy escala siempre.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="8"><span class="dtxt"><b>Responsable de handoff</b><span>Nombre, horario de atención y SLA de cinco minutos. Sin esto el workflow W02 no puede asignar a nadie.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="9"><span class="dtxt"><b>Identidad de email</b><span>Remitente, dominio, inbox de respuesta y footer legal. Desbloquea: los siete correos.</span></span></label>
+        <label class="dec"><input type="checkbox" data-dec="10"><span class="dtxt"><b>Aprobación de lotes y gasto</b><span>Artes, anuncios, formulario, plantillas y emails como lotes separados — más la autorización aparte para publicar workflows y activar presupuesto.</span></span></label>
+      </div>
+    </section>
+
+    <!-- ============ ACTIVACIÓN ============ -->
+    <section id="activacion">
+      <div class="sec-head"><span class="sec-num">15</span></div>
+      <h2>Orden exacto de activación</h2>
+      <p class="sec-sub">Ocho pasos. Cada uno depende del anterior; saltarse uno convierte un borrador en una promesa pública.</p>
+
+      <div class="stages">
+        <div class="stage"><span class="si">1</span><div><b>Joseph confirma las diez decisiones</b><span>Oferta, inventario, Addi, garantía, logística, descuentos y responsable humano</span></div></div>
+        <div class="stage"><span class="si">2</span><div><b>Readback de Shopify, Meta y GHL</b><span>Corregir contradicciones en base de conocimiento, copies y formulario</span></div></div>
+        <div class="stage"><span class="si">3</span><div><b>Aprobación por lotes separados</b><span>Anuncios · artes · formulario · WhatsApp · emails</span></div></div>
+        <div class="stage"><span class="si">4</span><div><b>Construir los tres workflows como Draft</b><span>Con readback visual de triggers, filtros, acciones y salidas</span></div></div>
+        <div class="stage"><span class="si">5</span><div><b>Lead interno y pruebas</b><span>30 conversaciones funcionales + 10 casos adversariales</span></div></div>
+        <div class="stage"><span class="si">6</span><div><b>Autorización para publicar workflows</b><span>Específica, separada de todo lo anterior</span></div></div>
+        <div class="stage"><span class="si">7</span><div><b>Autorización para activar gasto</b><span>Lote inicial de anuncios, con tope y fecha</span></div></div>
+        <div class="stage"><span class="si">8</span><div><b>Monitoreo de 72 horas</b><span>Escalar cambios solo con evidencia</span></div></div>
+      </div>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 866 178" role="img" aria-label="Cadena de ocho pasos de activación. Los pasos 4 a 7 —construir Drafts, lead interno y pruebas, publicar workflows y activar gasto— requieren cada uno una autorización específica de Joseph.">
+            <defs>
+              <marker id="d7a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <text class="mn-hot" x="530" y="40" text-anchor="middle">cada uno requiere autorización específica y separada</text>
+            <path class="cn-hot" d="M349,66 L349,52 L710,52 L710,66"/>
+
+            <path class="cn" d="M78,98 L135,98" marker-end="url(#d7a)"/>
+            <path class="cn" d="M183,98 L240,98" marker-end="url(#d7a)"/>
+            <path class="cn" d="M288,98 L345,98" marker-end="url(#d7a)"/>
+            <path class="cn" d="M393,98 L450,98" marker-end="url(#d7a)"/>
+            <path class="cn" d="M498,98 L555,98" marker-end="url(#d7a)"/>
+            <path class="cn" d="M603,98 L660,98" marker-end="url(#d7a)"/>
+            <path class="cn" d="M708,98 L765,98" marker-end="url(#d7a)"/>
+
+            <circle class="bx" cx="55" cy="98" r="21"/><text class="big" x="55" y="103" text-anchor="middle">1</text>
+            <circle class="bx" cx="160" cy="98" r="21"/><text class="big" x="160" y="103" text-anchor="middle">2</text>
+            <circle class="bx" cx="265" cy="98" r="21"/><text class="big" x="265" y="103" text-anchor="middle">3</text>
+            <circle class="bx-hot" cx="370" cy="98" r="21"/><text class="big" x="370" y="103" text-anchor="middle">4</text>
+            <circle class="bx-hot" cx="475" cy="98" r="21"/><text class="big" x="475" y="103" text-anchor="middle">5</text>
+            <circle class="bx-hot" cx="580" cy="98" r="21"/><text class="big" x="580" y="103" text-anchor="middle">6</text>
+            <circle class="bx-hot" cx="685" cy="98" r="21"/><text class="big" x="685" y="103" text-anchor="middle">7</text>
+            <circle class="bx" cx="790" cy="98" r="21"/><text class="big" x="790" y="103" text-anchor="middle">8</text>
+
+            <text class="sm" x="55" y="140" text-anchor="middle">Confirmar</text><text class="sm" x="55" y="153" text-anchor="middle">10 decisiones</text>
+            <text class="sm" x="160" y="140" text-anchor="middle">Readback de</text><text class="sm" x="160" y="153" text-anchor="middle">plataformas</text>
+            <text class="sm" x="265" y="140" text-anchor="middle">Aprobar</text><text class="sm" x="265" y="153" text-anchor="middle">lotes</text>
+            <text class="sm" x="370" y="140" text-anchor="middle">Construir</text><text class="sm" x="370" y="153" text-anchor="middle">Drafts</text>
+            <text class="sm" x="475" y="140" text-anchor="middle">Lead interno</text><text class="sm" x="475" y="153" text-anchor="middle">y pruebas</text>
+            <text class="sm" x="580" y="140" text-anchor="middle">Publicar</text><text class="sm" x="580" y="153" text-anchor="middle">workflows</text>
+            <text class="sm" x="685" y="140" text-anchor="middle">Activar</text><text class="sm" x="685" y="153" text-anchor="middle">gasto</text>
+            <text class="sm" x="790" y="140" text-anchor="middle">Monitorear</text><text class="sm" x="790" y="153" text-anchor="middle">72 horas</text>
+          </svg>
+        </div>
+        <figcaption><b>Aprobar un eslabón no autoriza el siguiente.</b> Los tres primeros pasos son trabajo de mesa y no tocan a nadie. Del cuatro al siete cada acción sale al mundo — crea artefactos en GHL, escribe a un contacto real, publica automatizaciones y gasta dinero — y por eso el dossier exige un «sí» distinto para cada una en lugar de una aprobación general del lanzamiento.</figcaption>
+      </figure>
+
+      <h3>Quién responde por cada frente</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Frente</th><th>Responsable</th><th>Aprueba</th><th>Siguiente acción</th></tr></thead>
+          <tbody>
+            <tr><td>Oferta y comercial</td><td>Joseph</td><td>Joseph</td><td>Entregar confirmaciones actuales</td></tr>
+            <tr><td>Ads y artes</td><td>Carlos / AIEAD</td><td>Joseph</td><td>Seleccionar los cinco anuncios iniciales</td></tr>
+            <tr><td>Formulario</td><td>Carlos / AIEAD</td><td>Joseph si cambia</td><td>Probar los tres campos TEXT</td></tr>
+            <tr><td>IA y base de conocimiento</td><td>Carlos / AIEAD</td><td>Joseph, condiciones</td><td>Ejecutar pruebas internas</td></tr>
+            <tr><td>WhatsApp</td><td>Carlos / AIEAD</td><td>Joseph + Meta</td><td>Cargar y verificar el lote de 11</td></tr>
+            <tr><td>Email</td><td>Carlos / AIEAD</td><td>Joseph para envío</td><td>Verificar 7/7 y prueba interna</td></tr>
+            <tr><td>Workflows</td><td>Carlos / AIEAD</td><td>Joseph para publicar</td><td>Construir Drafts del MVP</td></tr>
+            <tr><td>Tracking</td><td>Carlos / AIEAD</td><td>Joseph, prueba de compra</td><td>Validar ficha y checkout por color</td></tr>
+            <tr><td><strong>Lanzamiento</strong></td><td>Carlos + Joseph</td><td>Joseph</td><td>Autorizar fecha, gasto y monitoreo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ RIESGOS ============ -->
+    <section id="riesgos">
+      <div class="sec-head"><span class="sec-num">15</span></div>
+      <h2>Seis riesgos que no deben volverse promesa</h2>
+      <p class="sec-sub">Contradicciones vivas dentro del propio material. Cada una está escrita en algún copy que hoy parece aprobado.</p>
+
+      <div class="stages">
+        <div class="stage"><span class="si">01</span><div><b>El precio</b><span>El público y el comparativo deben leerse de Shopify el día de publicar. Las reuniones mencionan tickets históricos distintos — $1.700.000 entre ellos.</span></div></div>
+        <div class="stage"><span class="si">02</span><div><b>La garantía</b><span>Solo puede mencionarse como «garantía del fabricante» si la ficha o política lo confirma. La duración de un año requiere confirmación expresa y hoy no la tiene.</span></div></div>
+        <div class="stage"><span class="si">03</span><div><b>El inventario</b><span>Disponibilidad por color no equivale a unidades disponibles. No usar «últimas unidades» sin dato actual.</span></div></div>
+        <div class="stage"><span class="si">04</span><div><b>Addi</b><span>No permite prometer aprobación, cupo, cuota, plazo ni elegibilidad. «Desde 0%» sigue sujeta a reglas vigentes.</span></div></div>
+        <div class="stage"><span class="si">05</span><div><b>La entrega</b><span>Cobertura, envío, devolución y transferencia requieren fuente comercial actual y proceso humano validado.</span></div></div>
+        <div class="stage"><span class="si">06</span><div><b>El Trigger Link</b><span>La prueba previa muestra que GHL puede retirar un enlace escrito libremente por la IA. Ese método no se usa para compartir checkout.</span></div></div>
+      </div>
+
+      <div class="note">
+        <h4>Punto de reinicio recomendado</h4>
+        <p>Si esta conversación se retoma en otro momento: abrir primero el documento <strong>15</strong>, recoger las diez respuestas, y continuar por <strong>03 (catálogo) → 11 (WhatsApp) → 14 (pruebas)</strong>, en ese orden.</p>
+      </div>
+    </section>
+
+    <!-- ============ DEVOPS ============ -->
+    <section id="devops-stack">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span><span class="chip critico">Auditoría, no documentación</span></div>
+      <h2>Mapa del stack</h2>
+      <p class="sec-sub">Los 16 documentos describen el sistema comercial, no su infraestructura. Esta sección consolida lo que sí se puede afirmar sobre las plataformas y marca como hueco lo que alguien tiene que establecer antes de que el equipo pueda operar o mantener el sistema.</p>
+
+      <div class="note">
+        <h4>Qué falta no son las credenciales</h4>
+        <p>El dossier excluye tokens, IDs privados y datos bancarios <strong>a propósito</strong> — está escrito para revisión comercial. Lo que falta es el mapa: qué está conectado con qué, por qué mecanismo, y qué se rompe si uno falla. Nada de lo que sigue pide pegar un secreto en esta página.</p>
+      </div>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 860 370" role="img" aria-label="Mapa de las cuatro plataformas. Meta entrega leads a GHL con tres campos de texto, pendiente de verificar. GHL lleva a Shopify por Trigger Link, verificado el 31 de julio. El camino de vuelta desde Shopify hacia GHL, con los eventos de compra, está sin confirmar. GHL envía por WhatsApp con plantillas que Meta aún no aprueba. Addi no tiene integración: se resuelve por handoff humano.">
+            <defs>
+              <marker id="d8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah" points="0,1 10,5 0,9"/></marker>
+              <marker id="d8m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-mut" points="0,1 10,5 0,9"/></marker>
+              <marker id="d8h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon class="ah-hot" points="0,1 10,5 0,9"/></marker>
+            </defs>
+
+            <rect class="bx" x="30" y="100" width="170" height="80" rx="3"/>
+            <text x="115" y="129" text-anchor="middle">Meta</text>
+            <text class="sm" x="115" y="146" text-anchor="middle">Ads · Lead Forms</text>
+            <text class="sm" x="115" y="161" text-anchor="middle">aprueba plantillas WA</text>
+
+            <rect class="bx-hot" x="330" y="90" width="200" height="100" rx="3"/>
+            <text x="430" y="124" text-anchor="middle">GHL</text>
+            <text class="sm" x="430" y="141" text-anchor="middle">CRM · Conversation AI</text>
+            <text class="sm" x="430" y="156" text-anchor="middle">Workflows · Trigger Links</text>
+            <text class="mn-hot" x="430" y="175" text-anchor="middle">orquestador</text>
+
+            <rect class="bx" x="660" y="100" width="170" height="80" rx="3"/>
+            <text x="745" y="129" text-anchor="middle">Shopify</text>
+            <text class="sm" x="745" y="146" text-anchor="middle">Catálogo · Checkout</text>
+            <text class="mn" x="745" y="163" text-anchor="middle">fuente de verdad</text>
+
+            <rect class="bx" x="345" y="258" width="170" height="66" rx="3"/>
+            <text x="430" y="285" text-anchor="middle">WhatsApp</text>
+            <text class="sm" x="430" y="302" text-anchor="middle">canal de conversación</text>
+
+            <rect class="bx-gate" x="660" y="258" width="170" height="66" rx="3"/>
+            <text x="745" y="285" text-anchor="middle">Addi</text>
+            <text class="sm" x="745" y="302" text-anchor="middle">handoff humano</text>
+
+            <path class="cn-dash" d="M200,140 L322,140" marker-end="url(#d8m)"/>
+            <text class="mn" x="261" y="131" text-anchor="middle">lead + 3 campos</text>
+            <text class="mn" x="261" y="156" text-anchor="middle">por verificar</text>
+
+            <path class="cn" d="M530,124 L652,124" marker-end="url(#d8a)"/>
+            <text class="mn" x="591" y="115" text-anchor="middle">Trigger Link</text>
+            <text class="mn" x="591" y="140" text-anchor="middle">verificado 31 jul</text>
+
+            <path class="cn-hot-dash" d="M745,180 L745,230 L480,230 L480,194" marker-end="url(#d8h)"/>
+            <text class="mn-hot" x="612" y="222" text-anchor="middle">eventos de compra</text>
+
+            <path class="cn-dash" d="M380,190 L380,254" marker-end="url(#d8m)"/>
+            <text class="mn" x="372" y="228" text-anchor="end">plantillas + chat</text>
+
+            <path class="cn-dash" d="M115,180 L115,291 L341,291" marker-end="url(#d8m)"/>
+            <text class="mn" x="228" y="283" text-anchor="middle">aprueba plantillas</text>
+
+            <path class="cn-dash" d="M530,291 L656,291"/>
+            <path class="x" d="M586,284 L600,298"/>
+            <path class="x" d="M600,284 L586,298"/>
+            <text class="mn" x="593" y="314" text-anchor="middle">sin integración</text>
+
+            <path class="cn" d="M30,348 L58,348"/><text class="mn" x="64" y="352">verificado</text>
+            <path class="cn-dash" d="M150,348 L178,348"/><text class="mn" x="184" y="352">por verificar</text>
+            <path class="cn-hot-dash" d="M300,348 L328,348"/><text class="mn-hot" x="334" y="352">desconocido</text>
+          </svg>
+        </div>
+        <figcaption><b>De seis enlaces, uno solo está verificado — y ese exige volver a probarse.</b> El camino de ida funciona en papel; el de vuelta desde Shopify es el hueco crítico. Todo lo que dependa de saber que alguien compró cuelga de esa flecha naranja.</figcaption>
+      </figure>
+
+      <h3>Los seis enlaces, uno por uno</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Enlace</th><th>Mecanismo</th><th>Estado</th><th>Qué bloquea si falla</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Meta Lead Form → GHL</strong></td>
+              <td>Entrega nativa del lead + mapeo a 3 campos TEXT</td>
+              <td><span class="chip verificar">Por verificar</span></td>
+              <td>Toda la personalización de la IA. Sin los 3 campos, cada lead de Meta se comporta como uno de WhatsApp directo.</td>
+            </tr>
+            <tr>
+              <td><strong>Meta Ads → GHL</strong></td>
+              <td>Nombres de campaña, conjunto y anuncio en el contacto</td>
+              <td><span class="chip verificar">Por verificar</span></td>
+              <td>Atribución por creativo. El dossier lo condiciona a «cuando los sistemas lo entreguen».</td>
+            </tr>
+            <tr>
+              <td><strong>GHL → WhatsApp</strong></td>
+              <td>Plantillas aprobadas por Meta, enviadas desde GHL</td>
+              <td><span class="chip borrador">Bloqueado</span></td>
+              <td>Los 11 mensajes. Ninguna plantilla está aprobada todavía.</td>
+            </tr>
+            <tr>
+              <td><strong>GHL → Shopify</strong></td>
+              <td>Trigger Link: redirección rastreada de salida</td>
+              <td><span class="chip configurado">Verificado 31 jul</span></td>
+              <td>Toda ruta a ficha y checkout. Requiere prueba actual y tiene una limitación conocida (abajo).</td>
+            </tr>
+            <tr>
+              <td><strong>Shopify → GHL</strong></td>
+              <td><span class="todo">sin definir</span></td>
+              <td><span class="chip critico">Desconocido</span></td>
+              <td>Etapa Ganado · tag <code>purchase_confirmed</code> · carrito abandonado · CAC y ROAS · <strong>y la guarda «sin compra confirmada»</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>GHL / Shopify → Addi</strong></td>
+              <td>Ninguno. El dossier solo dice que se escala «al proceso o asesor autorizado»</td>
+              <td><span class="chip fuera">Sin integración</span></td>
+              <td>Nada técnico, pero el proceso de aplicación a Addi no está descrito en ninguna parte.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <h4>La consecuencia que el dossier no saca — verificar antes de asumirla</h4>
+        <p>La cadencia de 14 días valida «sin compra confirmada ni oportunidad Ganado» antes de cada envío. Si Shopify no le avisa a GHL que hubo una compra, <strong>esa guarda no tiene con qué evaluarse</strong> y alguien que ya compró puede seguir recibiendo los nueve mensajes de seguimiento.</p>
+        <p>Esto es una <em>inferencia</em> a partir de los documentos 10 y 13, no una afirmación del dossier. Es lo primero que el equipo debería confirmar o descartar.</p>
+      </div>
+    </section>
+
+    <section id="devops-contratos">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span></div>
+      <h2>Contratos de datos</h2>
+      <p class="sec-sub">Lo que sí está especificado con precisión. Es la referencia diaria del equipo: los nombres exactos que cualquier automatización, consulta o integración tiene que respetar.</p>
+
+      <h3>Campos del contacto</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Etiqueta</th><th>Field key</th><th>Tipo</th><th>Escribe</th></tr></thead>
+          <tbody>
+            <tr><td>PAGUREO | Perfil de uso</td><td><code>contact.pagureo__perfil_de_uso</code></td><td>TEXT</td><td>Meta · IA</td></tr>
+            <tr><td>PAGUREO | Dolor principal del espacio</td><td><code>contact.pagureo__dolor_principal_del_espacio</code></td><td>TEXT</td><td>Meta · IA</td></tr>
+            <tr><td>PAGUREO | Etapa de decisión</td><td><code>contact.pagureo__etapa_de_decisin</code></td><td>TEXT</td><td>Meta · IA</td></tr>
+            <tr><td>Producto</td><td><span class="todo">sin documentar</span></td><td>TEXT</td><td>IA</td></tr>
+            <tr><td>Ciudad</td><td><span class="todo">sin documentar</span></td><td>TEXT</td><td>IA</td></tr>
+            <tr><td>Plazo</td><td><span class="todo">sin documentar</span></td><td>TEXT</td><td>IA</td></tr>
+            <tr><td>Pago preferido</td><td><span class="todo">sin documentar</span></td><td>TEXT</td><td>IA</td></tr>
+            <tr><td>Último estado IA</td><td><span class="todo">sin documentar</span></td><td>TEXT</td><td>IA · Workflow</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <h4>Un field key no coincide con su etiqueta</h4>
+        <p>La etiqueta dice <strong>Etapa de decisión</strong>, pero la clave técnica es <code>pagureo__etapa_de_decisin</code> — <strong>sin la «ó»</strong>. GHL la eliminó al generar el slug, en vez de transliterarla a «o».</p>
+        <p>Cualquier código, consulta o webhook que apunte a <code>etapa_de_decision</code> <strong>fallará en silencio</strong>, devolviendo vacío en lugar de un error. Los otros dos campos no tienen el problema porque sus etiquetas no llevan tildes. Vale la pena revisar los cinco campos sin documentar por si arrastran la misma irregularidad.</p>
+      </div>
+
+      <div class="note">
+        <h4>Regla de tipo, no negociable</h4>
+        <p>Los ocho campos son <code>TEXT</code>. <strong>Ninguno puede ser dropdown, selección única o múltiple</strong>: Conversation AI y los Bot Goals no pueden escribir en campos de selección. La estandarización se logra con instrucciones en el prompt, no bloqueando la capacidad de escribir. Cambiar el tipo de un campo rompe su Bot Goal sin producir ningún error.</p>
+      </div>
+
+      <h3>Vocabulario de tags</h3>
+      <p><code>brand_pagureo</code> · <code>source_meta_form</code> · <code>source_click_to_whatsapp</code> · <code>consent_whatsapp</code> · <code>consent_email</code> · <code>handoff_human</code> · <code>wa_optout</code> · <code>purchase_confirmed</code></p>
+      <p>El primero es guarda obligatoria en todo workflow. <code>handoff_human</code> lo escribe el workflow 02, nunca la IA.</p>
+
+      <h3>Valores de <code>Último estado IA</code></h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Valor</th><th>Lo escribe</th><th>Efecto</th></tr></thead>
+          <tbody>
+            <tr><td><em>(vacío o descriptivo)</em></td><td>IA</td><td>Conversación activa. El dossier no fija un literal para este estado.</td></tr>
+            <tr><td><code>clicked_product_view</code></td><td>Workflow 03</td><td>Mueve la oportunidad a «Enviado a tienda»</td></tr>
+            <tr><td><code>clicked_checkout</code></td><td>Workflow 03</td><td>Mueve la oportunidad a «Checkout pendiente»</td></tr>
+            <tr><td><code>escalar_asesor</code></td><td>IA (Bot Goal)</td><td><strong>Dispara el workflow 02</strong></td></tr>
+            <tr><td><code>handoff_requested</code></td><td>Workflow 02</td><td>Confirma que el caso quedó asignado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>UTMs: dos formas distintas</h3>
+      <pre><b>Meta → sitio</b> (dinámica, resuelta por la plataforma)
+utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}
+&utm_content={{ad.name}}&utm_term={{adset.name}}
+
+<b>GHL → Shopify</b> (estática, por Trigger Link)
+utm_source=ghl&utm_medium=whatsapp_ai&utm_campaign=pagureo_ecommerce
+&utm_content=ficha_o_checkout_por_producto</pre>
+
+      <h3>Variables de plantilla WhatsApp</h3>
+      <p>Solo dos en todo el lote: <code>{{1}}</code> es el nombre del contacto y <code>{{2}}</code> es una URL de Trigger Link ya resuelta, exclusiva de <code>pg_link</code>. <strong>No existe variable de producto, referencia ni inventario</strong> — nada que pueda quedar desactualizado dentro de una plantilla ya aprobada por Meta.</p>
+    </section>
+
+    <section id="devops-silencioso">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span><span class="chip critico">Lo más útil de esta sección</span></div>
+      <h2>Fallos silenciosos</h2>
+      <p class="sec-sub">Siete formas en que este sistema se rompe sin generar un error, un log ni una alerta. Son las que cuestan dinero durante semanas antes de que alguien las note.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Dónde</th><th>Qué pasa</th><th>Por qué no se ve</th><th>Cómo detectarlo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Las 8 guardas</strong></td>
+              <td>Una condición falsa mata el envío</td>
+              <td>El paso termina sin log, sin reintento y sin notificar</td>
+              <td>Contar envíos esperados contra enviados, por día de cadencia</td>
+            </tr>
+            <tr>
+              <td><strong>Trigger Link en el chat</strong></td>
+              <td>GHL retira el enlace que la IA insertó libremente</td>
+              <td>La IA da la conversación por exitosa; el lead recibe un mensaje sin link</td>
+              <td>Cruzar mensajes que ofrecen enlace contra clics registrados <span class="mut">— ya documentado, doc 13</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tipo de campo</strong></td>
+              <td>Un campo pasa a selección y el Bot Goal deja de escribir</td>
+              <td>No hay error: el campo simplemente queda vacío para siempre</td>
+              <td>Auditar el tipo antes de publicar; medir % de contactos con campo vacío tras conversar</td>
+            </tr>
+            <tr>
+              <td><strong>Trigger del workflow 01</strong></td>
+              <td>Un <code>Contact Created</code> genérico capturaría contactos de Pagurai</td>
+              <td>El workflow corre normalmente, solo que sobre la gente equivocada</td>
+              <td>Confirmar que el trigger apunta a página y formulario exactos <span class="mut">— ya advertido, doc 10</span></td>
+            </tr>
+            <tr>
+              <td><strong>Categoría de plantilla</strong></td>
+              <td>Meta recategoriza una Utility como Marketing</td>
+              <td>Se sigue enviando, pero bajo el consentimiento equivocado</td>
+              <td>Releer la categoría en Meta antes de cada activación</td>
+            </tr>
+            <tr>
+              <td><strong>Contenido vencido</strong></td>
+              <td>Una oferta o precio caduca dentro de una plantilla ya aprobada</td>
+              <td>La plantilla sigue siendo válida para Meta; la promesa ya no lo es</td>
+              <td>Fecha de vigencia por plantilla; bloquear <code>pg_addi</code> y <code>pg_oferta</code> sin confirmación del día</td>
+            </tr>
+            <tr>
+              <td><strong>Compra no notificada</strong></td>
+              <td>La cadencia sigue escribiéndole a alguien que ya compró</td>
+              <td>La guarda «sin compra» no tiene dato con qué evaluarse</td>
+              <td>Cruzar pedidos de Shopify contra contactos en cadencia activa <span class="mut">— inferencia, confirmar</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="devops-vigencia">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span></div>
+      <h2>Vigencia de lo configurado</h2>
+      <p class="sec-sub">El dossier declara componentes «configurados» con una fecha de lectura. Ninguna se ha vuelto a verificar. Al 2 de septiembre de 2026, esto es lo que hace que nadie mire cada plataforma.</p>
+
+      <figure>
+        <div class="dgwrap">
+          <svg class="dg" viewBox="0 0 720 216" role="img" aria-label="Días transcurridos desde el último readback de cada componente, al 2 de septiembre de 2026: catálogo y precios 33 días, Trigger Links 33 días, formulario Meta 30 días, emails PGR 30 días, prompt de la IA 20 días.">
+            <g class="barrow">
+              <rect class="hit" x="0" y="23" width="720" height="36"/>
+              <text x="206" y="45" text-anchor="end">Catálogo y precios</text>
+              <path class="bar" d="M220,33 H596 A4,4 0 0 1 600,37 V45 A4,4 0 0 1 596,49 H220 Z"/>
+              <text x="609" y="45">33 <tspan class="sm">días</tspan></text>
+            </g>
+            <g class="barrow">
+              <rect class="hit" x="0" y="59" width="720" height="36"/>
+              <text x="206" y="81" text-anchor="end">Trigger Links (13)</text>
+              <path class="bar" d="M220,69 H596 A4,4 0 0 1 600,73 V81 A4,4 0 0 1 596,85 H220 Z"/>
+              <text x="609" y="81">33 <tspan class="sm">días</tspan></text>
+            </g>
+            <g class="barrow">
+              <rect class="hit" x="0" y="95" width="720" height="36"/>
+              <text x="206" y="117" text-anchor="end">Formulario Meta</text>
+              <path class="bar" d="M220,105 H561 A4,4 0 0 1 565,109 V117 A4,4 0 0 1 561,121 H220 Z"/>
+              <text x="574" y="117">30 <tspan class="sm">días</tspan></text>
+            </g>
+            <g class="barrow">
+              <rect class="hit" x="0" y="131" width="720" height="36"/>
+              <text x="206" y="153" text-anchor="end">Emails PGR 01–07</text>
+              <path class="bar" d="M220,141 H561 A4,4 0 0 1 565,145 V153 A4,4 0 0 1 561,157 H220 Z"/>
+              <text x="574" y="153">30 <tspan class="sm">días</tspan></text>
+            </g>
+            <g class="barrow">
+              <rect class="hit" x="0" y="167" width="720" height="36"/>
+              <text x="206" y="189" text-anchor="end">Prompt IA (v6)</text>
+              <path class="bar" d="M220,177 H446 A4,4 0 0 1 450,181 V189 A4,4 0 0 1 446,193 H220 Z"/>
+              <text x="459" y="189">20 <tspan class="sm">días</tspan></text>
+            </g>
+            <path class="base" d="M220,27 V199"/>
+          </svg>
+        </div>
+        <figcaption><b>Días desde el último readback documentado.</b> El componente más desactualizado es también el más frágil: el catálogo lleva un mes sin releerse y es la fuente de verdad de precio, inventario y checkout. Ninguno de los cinco está fresco.</figcaption>
+      </figure>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Componente</th><th>Último readback</th><th class="num">Días</th><th>Qué depende de él</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Catálogo y precios</strong></td><td>31 jul 2026</td><td class="num">33</td><td>Los 10 anuncios, la base de conocimiento de la IA, los 5 checkouts</td></tr>
+            <tr><td><strong>Trigger Links</strong> (8 ficha + 5 checkout)</td><td>31 jul 2026</td><td class="num">33</td><td>Toda ruta a tienda, los 7 emails, el workflow 03</td></tr>
+            <tr><td><strong>Formulario Meta</strong></td><td>3 ago 2026</td><td class="num">30</td><td>Los 3 campos, el trigger del workflow 01, la personalización de la IA</td></tr>
+            <tr><td><strong>Emails PGR 01–07</strong></td><td>3 ago 2026</td><td class="num">30</td><td>La mitad de la cadencia de 14 días</td></tr>
+            <tr><td><strong>Prompt Conversation AI v6</strong></td><td>13 ago 2026</td><td class="num">20</td><td>Toda la conversación y los 8 Bot Goals</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>El protocolo de readback</h3>
+      <p>El dossier ya practica esta disciplina; solo no la nombra. Formalizada, es el procedimiento de despliegue del sistema:</p>
+      <div class="stages">
+        <div class="stage"><span class="si">1</span><div><b>Leer la plataforma en vivo</b><span>No el documento. La lectura es la evidencia.</span></div></div>
+        <div class="stage"><span class="si">2</span><div><b>Comparar y anotar cada diferencia</b><span>Contra lo escrito, campo por campo.</span></div></div>
+        <div class="stage"><span class="si">3</span><div><b>Corregir la fuente de menor jerarquía</b><span>El documento cede ante la plataforma, nunca al revés.</span></div></div>
+        <div class="stage"><span class="si">4</span><div><b>Registrar fecha, fuente y responsable</b><span>Sin esto, el readback no ocurrió.</span></div></div>
+        <div class="stage"><span class="si">5</span><div><b>Repetir antes de cada activación</b><span>Y ante cualquier cambio de precio, oferta o inventario.</span></div></div>
+      </div>
+    </section>
+
+    <section id="devops-entornos">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span></div>
+      <h2>Entornos y pruebas</h2>
+      <p class="sec-sub">No hay staging. Meta, GHL, Shopify y WhatsApp son producción, y una prueba mal hecha le escribe a una persona real. Por eso las aprobaciones del documento 14 son separadas — son el sustituto de un entorno aislado.</p>
+
+      <div class="grid g2">
+        <div class="card">
+          <h4 style="margin-top:0">Lo más parecido a un entorno seguro</h4>
+          <p style="margin:0;font-size:14px;color:var(--ink-2)">Workflows guardados como <strong>Draft</strong> sin publicar · plantillas <strong>sin someter</strong> a Meta · campaña creada <strong>sin activar gasto</strong> · un <strong>contacto interno autorizado</strong> como único destinatario.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-top:0">Lo que no tiene modo seguro</h4>
+          <p style="margin:0;font-size:14px;color:var(--ink-2)">Una plantilla aprobada por Meta <strong>ya se puede enviar</strong>. Un workflow publicado <strong>corre solo</strong>. Un anuncio activo <strong>gasta</strong>. Un Trigger Link compartido <strong>queda vivo</strong> aunque el precio cambie.</p>
+        </div>
+      </div>
+
+      <h3>Batería mínima antes de tráfico</h3>
+      <p><strong>30 conversaciones funcionales</strong> repartidas entre los cinco perfiles, ambas rutas de entrada e intención baja, media y alta · <strong>10 casos adversariales</strong> con resultado, evidencia y corrección registrados · <strong>un checkout probado por cada color</strong> con contacto interno · <strong>72 horas de monitoreo</strong> sin tocar el anuncio ganador.</p>
+      <p>Cada caso valida siete cosas: dato leído, dato escrito, respuesta, siguiente pregunta, estado de IA, etapa del pipeline y si hubo o no Trigger Link.</p>
+    </section>
+
+    <section id="devops-pendientes">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span><span class="chip critico">7 pendientes</span></div>
+      <h2>Verificaciones técnicas pendientes</h2>
+      <p class="sec-sub">Cada una con un criterio de aceptación concreto — algo que se puede declarar cumplido o no cumplido, sin discusión.</p>
+
+      <div class="tw">
+        <table>
+          <thead><tr><th>Verificación</th><th>Criterio de aceptación</th><th>Bloquea</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>1 · Integración Shopify → GHL</strong><br><span class="mut">¿llegan los eventos de compra?</span></td>
+              <td>Una compra de prueba genera un evento verificable en GHL, atribuible al contacto correcto</td>
+              <td><span class="chip critico">Crítico</span> Ganado, <code>purchase_confirmed</code>, carrito abandonado, CAC/ROAS, guarda «sin compra»</td>
+            </tr>
+            <tr>
+              <td><strong>2 · Mapeo Meta → GHL</strong></td>
+              <td>Un lead de prueba deposita P1, P2 y P3 como <em>texto exacto</em> en los tres campos correctos</td>
+              <td>Toda la personalización de la IA</td>
+            </tr>
+            <tr>
+              <td><strong>3 · Mecanismo oficial de Trigger Link</strong></td>
+              <td>La IA entrega un enlace que sobrevive al envío y cuyo clic queda registrado</td>
+              <td>Toda ruta a checkout</td>
+            </tr>
+            <tr>
+              <td><strong>4 · Pixel y Conversions API de Meta</strong><br><span class="mut">no se mencionan en ningún documento</span></td>
+              <td>Decidir si se instalan; si sí, verificar que los eventos llegan y deduplican</td>
+              <td>Optimización de Meta más allá del lead</td>
+            </tr>
+            <tr>
+              <td><strong>5 · Autenticación del dominio de email</strong><br><span class="mut">SPF, DKIM, DMARC</span></td>
+              <td>Los siete correos llegan a bandeja principal en una prueba a Gmail y Outlook</td>
+              <td>La mitad de la cadencia de 14 días</td>
+            </tr>
+            <tr>
+              <td><strong>6 · Inventario de cuentas y accesos</strong></td>
+              <td>Tabla completa: Business Manager, cuenta de WhatsApp + número, subcuenta GHL, tienda Shopify, y quién es admin de cada una</td>
+              <td>Continuidad operativa y respuesta ante incidentes</td>
+            </tr>
+            <tr>
+              <td><strong>7 · Límite de mensajería de WhatsApp</strong></td>
+              <td>Conocer el tier actual y contrastarlo con el volumen de leads que produce el presupuesto diario</td>
+              <td>La capacidad real de la cadencia el día de mayor volumen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Inventario de cuentas — plantilla por llenar</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Plataforma</th><th>Identificador</th><th>Admin</th><th>Plan / tier</th></tr></thead>
+          <tbody>
+            <tr><td>Meta Business Manager</td><td><span class="todo">por definir</span></td><td><span class="todo">por definir</span></td><td class="mut">—</td></tr>
+            <tr><td>WhatsApp Business Account</td><td><span class="todo">número y WABA</span></td><td><span class="todo">por definir</span></td><td><span class="todo">tier de mensajería</span></td></tr>
+            <tr><td>GHL — subcuenta</td><td><span class="todo">por definir</span></td><td><span class="todo">por definir</span></td><td><span class="todo">por definir</span></td></tr>
+            <tr><td>Shopify</td><td><span class="todo">dominio de tienda</span></td><td><span class="todo">por definir</span></td><td><span class="todo">por definir</span></td></tr>
+            <tr><td>Dominio de correo</td><td><span class="todo">remitente y dominio</span></td><td><span class="todo">por definir</span></td><td class="mut">decisión pendiente #9</td></tr>
+            <tr><td>Addi</td><td><span class="todo">comercio / contacto</span></td><td><span class="todo">por definir</span></td><td class="mut">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="devops-datos">
+      <div class="sec-head"><span class="sec-num">TÉCNICO</span></div>
+      <h2>Datos personales y retención</h2>
+      <p class="sec-sub">El sistema recoge datos identificables de personas en Colombia y los distribuye entre cuatro plataformas. El dossier cubre el consentimiento con rigor; la retención y la titularidad no aparecen.</p>
+
+      <div class="grid g2">
+        <div class="card">
+          <h4 style="margin-top:0">Qué se recoge</h4>
+          <p style="margin:0;font-size:14px;color:var(--ink-2)">Nombre completo, teléfono, correo, ciudad o zona, perfil de uso, dolor declarado, etapa de decisión, plazo de compra, forma de pago preferida y el historial completo de la conversación.</p>
+        </div>
+        <div class="card">
+          <h4 style="margin-top:0">Cómo se evidencia el consentimiento</h4>
+          <p style="margin:0;font-size:14px;color:var(--ink-2)">Política de privacidad enlazada en el formulario · tags <code>consent_whatsapp</code> y <code>consent_email</code> · DND nativo de GHL · <code>wa_optout</code> · la palabra SALIR en el footer de cada plantilla de Marketing.</p>
+        </div>
+      </div>
+
+      <h3>Lo que falta definir</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Pregunta</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td>¿Cuánto tiempo se retienen los datos de un lead que nunca compró?</td><td><span class="todo">sin definir</span></td></tr>
+            <tr><td>¿Quién es el responsable del tratamiento de datos?</td><td><span class="todo">sin definir</span></td></tr>
+            <tr><td>¿Por qué canal se atiende una solicitud de supresión o rectificación?</td><td><span class="todo">sin definir</span></td></tr>
+            <tr><td>¿Dónde residen físicamente los datos, y se informa la transferencia internacional?</td><td><span class="todo">sin definir</span></td></tr>
+            <tr><td>¿Qué pasa con la base cuando termina la campaña?</td><td><span class="todo">sin definir</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <h4>Nota de alcance</h4>
+        <p>El tratamiento de datos personales en Colombia se rige por la <strong>Ley 1581 de 2012</strong> y su regulador es la Superintendencia de Industria y Comercio. Esta página señala los huecos operativos; <strong>no constituye asesoría legal</strong>. Las cinco preguntas de arriba deberían resolverse con quien lleve el tema jurídico antes de recibir el primer lead real.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p><strong>Dossier PAGUREO</strong> · 16 documentos · corte 27 de agosto de 2026 · fuente: <code>carlos estrategia/</code></p>
+      <p>Esta página es una reorganización de lectura. No contiene secretos, tokens, IDs privados, datos bancarios ni transcripciones. Las cifras comerciales corresponden al snapshot del 31 de julio de 2026 y requieren verificación antes de cualquier anuncio, enlace o venta.</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- mobile nav ---- */
+  var btn = document.getElementById("navBtn");
+  var body = document.getElementById("railBody");
+  if (btn && body){
+    btn.addEventListener("click", function(){
+      var open = body.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "Índice ▴" : "Índice ▾";
+    });
+    body.addEventListener("click", function(e){
+      if (e.target.closest("a") && window.matchMedia("(max-width:940px)").matches){
+        body.classList.remove("open");
+        btn.setAttribute("aria-expanded","false");
+        btn.textContent = "Índice ▾";
+      }
+    });
+  }
+
+  /* ---- scroll spy ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".rail-list a"));
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute("href").slice(1);
+    if (!map[id]) map[id] = [];
+    map[id].push(a);
+  });
+  var sections = Object.keys(map)
+    .map(function(id){ return document.getElementById(id); })
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length){
+    var visible = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ visible[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0; });
+      var best = null, bestVal = 0;
+      Object.keys(visible).forEach(function(id){
+        if (visible[id] > bestVal){ bestVal = visible[id]; best = id; }
+      });
+      links.forEach(function(a){ a.classList.remove("on"); });
+      if (best && map[best]) map[best].forEach(function(a){ a.classList.add("on"); });
+    }, { rootMargin: "-10% 0px -70% 0px", threshold: [0, .25, .5, 1] });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  /* ---- decisiones ---- */
+  var KEY = "pagureo.decisiones.v1";
+  var boxes = Array.prototype.slice.call(document.querySelectorAll(".dec input[type=checkbox]"));
+  var countEl = document.getElementById("decCount");
+  var noteEl = document.getElementById("decNote");
+  var resetEl = document.getElementById("decReset");
+
+  function read(){
+    try {
+      var raw = localStorage.getItem(KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch(e){ return {}; }
+  }
+  function write(state){
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function render(){
+    var n = boxes.filter(function(b){ return b.checked; }).length;
+    if (countEl) countEl.textContent = String(n);
+    if (noteEl){
+      noteEl.textContent = n === 0 ? "el lanzamiento espera las diez"
+        : n === 10 ? "listo para el readback de plataforma"
+        : "faltan " + (10 - n) + " para desbloquear el readback";
+    }
+  }
+
+  var state = read();
+  boxes.forEach(function(b){
+    var k = b.getAttribute("data-dec");
+    if (state[k]) b.checked = true;
+    b.addEventListener("change", function(){
+      var s = read();
+      if (b.checked) s[k] = 1; else delete s[k];
+      write(s);
+      render();
+    });
+  });
+  if (resetEl){
+    resetEl.addEventListener("click", function(){
+      boxes.forEach(function(b){ b.checked = false; });
+      write({});
+      render();
+    });
+  }
+  render();
+})();
+</script>
