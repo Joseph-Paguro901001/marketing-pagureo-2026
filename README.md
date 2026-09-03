@@ -12,15 +12,13 @@ Dossier de estrategia comercial para la venta directa del sillón reclinable PAG
 
 | Ruta | Qué es |
 |------|--------|
-| [`dossier-pagureo.html`](dossier-pagureo.html) | Vista consolidada de los 16 documentos: estado de cada pieza, el embudo completo, nueve diagramas de lógica y una sección técnica para el equipo de desarrollo. Sin dependencias ni build. |
+| [`index.html`](index.html) | Vista consolidada de los 16 documentos: estado de cada pieza, el embudo completo, nueve diagramas de lógica y una sección técnica para el equipo de desarrollo. Sistema de marca PAGUREO (azul `#0360AB` / magenta `#C01C83`, Montserrat · Poppins · Inter). Sin dependencias ni build. |
 | [`carlos estrategia/`](carlos%20estrategia/) | Los 16 documentos fuente en Markdown, del `00` (índice) al `15` (estado y siguientes pasos). |
 
 ## Ver el dossier
 
-Abre `dossier-pagureo.html` en cualquier navegador.
-
-Para servirlo como página web con GitHub Pages: activa Pages sobre la rama `main`
-y copia o renombra el archivo a `index.html`.
+Abre `index.html` en cualquier navegador, o visita la página publicada:
+**https://joseph-paguro901001.github.io/marketing-pagureo-2026/**
 
 ## Estructura de los 16 documentos
 
